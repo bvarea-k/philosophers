@@ -1,0 +1,42 @@
+- pthread_create    -> crea hilos (uno por filósofo. Cada hilo lanza la rutina de dormir, comer y pensar).
+- pthread_detach   -> marca un hilo para que libere sus recursos automáticamente cuando termine. Puedo usarlo para autoliberarse en vez de usar join.
+- pthread_join     -> Espera a que un hilo concreto termine. Me puede servir para esperar a que los hilos terminen antes de salir del programa.
+- pthread_mutex_init  -> inicializa un mutex. Para inicializar los mutex de los tenedores o para proteger el acceso a variables compartidas (como imprimir o verificar el tiempo de la última comida).
+- pthread_mutex_destroy -> destruye un mutex. Para limpiar recursos al final del programa.
+- pthread_mutex_lock  -> bloquea un mutex. Evita que dos hilos usen una variable al mismo tiempo. Me puede servir para que dos filos no usen 1 tenedor a la vez.
+- pthread_mutex_unlock -> desbloquea el mutex. Soltar el tenedor.
+- gettimeofday -> Obtiene la hora actual en microsegundos.
+
+
+// t_philosopher: cada filósofo tiene su info
+typedef struct s_philosopher {
+    int                 philo_id;
+    int                 meals_eaten;
+    long                last_meal_time;
+    pthread_t           thread;
+    pthread_mutex_t     *l_fork;
+    pthread_mutex_t     *r_fork;
+    struct s_table      *table; // puntero a la mesa compartida
+}               t_philosopher;
+
+
+
+now -last_meal_time para saber si se ha muerto?
+
+// t_table: la principal
+typedef struct s_table {
+    int                 number_of_philosophers;
+    long                time_to_die; // tiempo máximo sin comer antes de morir
+    long                time_to_eat;
+    long                time_to_sleep;
+    int                 meals_required;
+
+    long                start_time;
+    int                 someone_died;
+
+    pthread_mutex_t     *forks;
+    pthread_mutex_t     print_mutex;
+    pthread_mutex_t     death_mutex;
+
+    t_philosopher       *philosophers;
+}               t_table;
