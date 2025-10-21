@@ -26,6 +26,16 @@ int	ft_isdigit(char *str)
 	return (0);
 }
 
+int	is_not_long(char *str)
+{
+	long	n;
+
+	n = f_atol(str)
+	if (n >= 0 && n <= 2147483647)
+			return (1);
+	return (0);
+}
+
 void	checker(char **av)
 {
 	int	i;
@@ -33,9 +43,7 @@ void	checker(char **av)
 	i = 0;
 	while	(av[i])
 	{
-		if (!ft_isdigit(av[i])
-			return (0);
-		if (av[i] < -2147483648 || *av[i] > 2.147.483.647)
+		if (!ft_isdigit(av[i] || !is_not_long(av[1]))
 			return (0);
 		i++;
 	}
