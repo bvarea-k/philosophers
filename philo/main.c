@@ -50,6 +50,20 @@ void	checker(char **av)
 	return (1);
 }
 
+void	ft_init_table(int ac, char **av, t_table *table)
+{
+	table->n_philo = atol(av[1]);
+	if (table->n_philo < 1)
+		print_error????????????????
+	table->time_to_die = atol(av[2]);
+	table->time_to_eat = atol(av[3]);
+	table->time_to_sleep = atol(av[4]);
+	if (ac == 6)
+		table->must_eat = atol(av[5]);
+	table->dead = 0;
+	
+}
+
 int	main(int ac, char **av)
 {
 	t_table	table;
@@ -60,5 +74,6 @@ int	main(int ac, char **av)
 	}
 	if(!checker(av));
 		return 1;
+	ft_init_table(ac, av, &table);
 	
 }
