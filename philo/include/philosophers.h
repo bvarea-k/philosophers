@@ -1,0 +1,43 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philosophers.h                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bvarea-k <bvarea-k@student.42malaga.c      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/15 10:29:01 by bvarea-k          #+#    #+#             */
+/*   Updated: 2025/10/15 10:29:03 by bvarea-k         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef PHILOSOPHERS_H
+# define PHILOSOPHERS_H
+
+# include <stdio.h>
+# include <unistd.h>
+
+typedef struct s_table
+{
+int	n_philo; //número de filósofos. Define el tamaño
+int	time_to_die; //tiempo que puede pasar sin comer
+int	time_to_eat; //tiempo que tarda en comer
+int	time_to_sleep; //tiempo que tarda en dormir
+int	must_eat; //número opcional de veces que comer
+int	dead; //flag de muerto
+int	start_time; //tiempo del inicio de la sesión
+pthread_mutex_t	*forks; //array de mutexes de tenedores
+
+} t_table;
+
+typedef struct s_philo
+{
+int				id_philo; // identificador del folósofo
+pthread_mutex_t	*r_fork; //mutex del tenedor derecho
+pthread_mutex_t	*l_fork; // mutex del tenedor izquierdo
+long			last_meal;//cuando el philo empezó a comer por última vez
+int				meals_eaten;//cuántas veces ha comido
+pthread_mutex_t	*mutex_eat;//proteger acceso a last_meal y meals_eaten, evitar condiciones de carrera
+t_table			*table; //puntero a estructura general
+} t_philo;
+
+#endif
