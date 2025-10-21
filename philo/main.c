@@ -20,7 +20,7 @@ int	ft_isdigit(char *str)
 	i = 0;
 	while(str[i])
 		{
-			if (c >= '0' && c <= '9')
+			if (str[i] >= '0' && str[i] <= '9')
 				return (1);
 		}
 	return (0);
@@ -40,7 +40,7 @@ void	checker(char **av)
 {
 	int	i;
 	
-	i = 0;
+	i = 1;
 	while	(av[i])
 	{
 		if (!ft_isdigit(av[i] || !is_not_long(av[1]))
@@ -52,6 +52,9 @@ void	checker(char **av)
 
 void	ft_init_table(int ac, char **av, t_table *table)
 {
+	int	i;
+
+	
 	table->n_philo = atol(av[1]);
 	if (table->n_philo < 1)
 		print_error????????????????
@@ -61,8 +64,15 @@ void	ft_init_table(int ac, char **av, t_table *table)
 	if (ac == 6)
 		table->must_eat = atol(av[5]);
 	table->dead = 0;
-	
+	table->forks = malloc(table->n_philo * sizeof(pthread_mutex_t));
+	while (i < table->n_philo)
+    {
+        pthread_mutex_init(&table->forks[i], NULL);
+        i++;
+    }
 }
+
+int	init_philo(
 
 int	main(int ac, char **av)
 {
@@ -72,8 +82,12 @@ int	main(int ac, char **av)
 		write(1, "Invalid number of arguments.\n", 29);
 		return (0);
 	}
-	if(!checker(av));
+	if (!checker(av));
+{
+		write(1, "Invalid argument(s)\n", ????????);
 		return 1;
 	ft_init_table(ac, av, &table);
+
+	//TO DO: inicializar filósofoa y crear hilos
 	
 }
