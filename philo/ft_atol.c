@@ -12,7 +12,7 @@
 
 #include "philosophers.h"
 
-int	ft_atoi(const char *nptr)
+long	ft_atol(const char *nptr)
 {
 	int	pos;
 	int	s;
