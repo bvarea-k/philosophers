@@ -13,16 +13,17 @@
 #include "philosophers.h"
 
 
-int	ft_isdigit(int c)
+int	ft_isdigit(char *str)
 {
-	if (c >= '0' && c <= '9')
-	{
-		return (2048);
-	}
-	else
-	{
-		return (0);
-	}
+	int i;
+
+	i = 0;
+	while(str[i])
+		{
+			if (c >= '0' && c <= '9')
+				return (1);
+		}
+	return (0);
 }
 
 void	checker(char **av)
@@ -30,11 +31,11 @@ void	checker(char **av)
 	int	i;
 	
 	i = 0;
-	while	(*av[i])
+	while	(av[i])
 	{
-		if (*av[i] < '0' || av[i] > '9')
+		if (!ft_isdigit(av[i])
 			return (0);
-		if (*av[i] < -2147483648 || *av[i] > 2.147.483.647)
+		if (av[i] < -2147483648 || *av[i] > 2.147.483.647)
 			return (0);
 		i++;
 	}
@@ -43,10 +44,13 @@ void	checker(char **av)
 
 int	main(int ac, char **av)
 {
+	t_table	table;
 	if (ac != 5 && ac != 6)
 	{
 		write(1, "Invalid number of arguments.\n", 29);
 		return (0);
 	}
-	checker(av);
+	if(!checker(av));
+		return 1;
+	
 }
