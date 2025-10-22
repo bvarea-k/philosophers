@@ -40,3 +40,12 @@ typedef struct s_table {
 
     t_philosopher       *philosophers;
 }               t_table;
+
+
+Cosas hechas:
+- Main, checker, inicializar y liberar table.
+
+-TO DO:
+- inicializar philo. ¿CÓMO? 
+    +Creo una estructura que reúna la mesa y los filos.
+    +MEto philos en la estructura mesa y mesa en philos.
