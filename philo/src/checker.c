@@ -6,7 +6,7 @@
 /*   By: bvarea-k <bvarea-k@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/22 11:19:15 by bvarea-k          #+#    #+#             */
-/*   Updated: 2025/10/22 11:44:07 by bvarea-k         ###   ########.fr       */
+/*   Updated: 2025/10/22 13:35:26 by bvarea-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ static int	ft_isdigit(char *str)
 	int i;
 
 	i = 0;
+	if (str[0] == '-')
+		return (0);
 	while(str[i])
 		{
 			if (str[i] >= '0' && str[i] <= '9')
@@ -38,13 +40,13 @@ static int	is_not_long(char *str)
 int	ft_checker(char **av)
 {
 	int	i;
-	
+
 	i = 1;
 	while	(av[i])
 	{
 		if (!ft_isdigit(av[i]))
 			ft_print_error(ERROR_NUMBER);
-		if (!is_not_long(av[i]))
+		else if (!is_not_long(av[i]))
 			ft_print_error(ERROR_NUMBER);
 		i++;
 	}
