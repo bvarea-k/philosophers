@@ -15,6 +15,7 @@
 int	main(int ac, char **av)
 {
 	t_table	table;
+	t_philo	philo;
 
 	table.forks= NULL;
 	if (ac != 5 && ac != 6)
@@ -25,8 +26,19 @@ int	main(int ac, char **av)
 	if (!ft_checker(av))
 		return (1);
 	if (!ft_init_table(ac, av, &table))
+	{
+		ft_free_table(&table);
 		return (1);
+	}
+	if (!ft_init_philo)
+	{
+		//free_filo??
+		return (1);
+	}
+	
 
 	//TO DO: inicializar filósofoa y crear hilos
+	ft_free_table(&table);
 	return (0);
 }
+
