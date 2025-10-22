@@ -18,7 +18,6 @@ void	ft_free_table(t_table *table)
 
 	if (!table || !table->forks)
 		return ;
-
 	i = 0;
 	while (i < table->n_philo)
 	{
