@@ -6,7 +6,7 @@
 /*   By: bvarea-k <bvarea-k@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/22 11:19:15 by bvarea-k          #+#    #+#             */
-/*   Updated: 2025/10/22 13:35:26 by bvarea-k         ###   ########.fr       */
+/*   Updated: 2025/10/22 13:50:25 by bvarea-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,13 @@ static int	ft_isdigit(char *str)
 	return (0);
 }
 
-static int	is_not_long(char *str)
+static int	is_not_long_neg(char *str)
 {
 	long	n;
 
 	n = ft_atol(str);
-	if (n >= 0 && n <= 2147483647)
-			return (1);
+	if (n >= 1 && n <= 2147483647)
+		return (1);
 	return (0);
 }
 
@@ -46,7 +46,7 @@ int	ft_checker(char **av)
 	{
 		if (!ft_isdigit(av[i]))
 			ft_print_error(ERROR_NUMBER);
-		else if (!is_not_long(av[i]))
+		else if (!is_not_long_neg(av[i]))
 			ft_print_error(ERROR_NUMBER);
 		i++;
 	}

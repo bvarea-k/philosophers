@@ -1,25 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bvarea-k <bvarea-k@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/22 11:31:49 by bvarea-k          #+#    #+#             */
-/*   Updated: 2025/10/22 13:48:25 by bvarea-k         ###   ########.fr       */
+/*   Created: 2025/10/22 14:04:05 by bvarea-k          #+#    #+#             */
+/*   Updated: 2025/10/22 14:05:12 by bvarea-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-void	ft_print_error(int error_n)
+void	ft_free_table(t_table *table)
 {
-	if (error_n == ERROR_ARGS)
-		printf("Invalid number of arguments.\n");
-	else if (error_n == ERROR_PHILO_NUMBER)
-		printf("There must be at least 1 philosopher.\n");
-	else if (error_n == ERROR_NUMBER)
-		printf("All arguments must be numbers between 1 and 2147483647.\n");
-	
-	
+	int	i;
+
+	if (!table || !table->forks)
+		return ;
+
+	i = 0;
+	while (i < table->n_philo)
+	{
+		pthread_mutex_destroy(&table->forks[i]);
+		i++;
+	}
+	free(table->forks);
+	table->forks = NULL;
 }
