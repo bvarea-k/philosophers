@@ -35,34 +35,28 @@ SRC_FILES = main init ft_atol error checker
 SRCS = $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
 OBJS = $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILES)))
 
-# Default rule
+# Rules
 all: $(NAME)
 
-# Crear directorio de objetos si no existe
 DIRS:
 	@mkdir -p $(OBJ_DIR)
 
-# Compilar el ejecutable
 $(NAME): $(OBJS)
 	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 	@echo "$(GREEN)[BUILD] Executable created: $(NAME)$(DEF_COLOR)"
 
-# Regla para compilar .c en .o
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c | DIRS
 	@echo "$(CYAN)[COMPILING] $<$(DEF_COLOR)"
 	@$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDE)
 
-# Limpiar objetos
 clean:
 	@rm -rf $(OBJ_DIR)
 	@echo "$(RED)[CLEAN] Object files removed$(DEF_COLOR)"
 
-# Limpiar todo
 fclean: clean
 	@rm -f $(NAME)
 	@echo "$(RED)Cleaned all files and executables$(DEF_COLOR)"
 
-# Recompilar
 re: fclean all
 
 .PHONY: all clean fclean re DIRS
