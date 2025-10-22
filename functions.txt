@@ -5,7 +5,7 @@
 - pthread_mutex_destroy -> destruye un mutex. Para limpiar recursos al final del programa.
 - pthread_mutex_lock  -> bloquea un mutex. Evita que dos hilos usen una variable al mismo tiempo. Me puede servir para que dos filos no usen 1 tenedor a la vez.
 - pthread_mutex_unlock -> desbloquea el mutex. Soltar el tenedor.
-- gettimeofday -> Obtiene la hora actual en microsegundos.
+- gettimeofday -> Obtiene la hora actual en microsegundos. gettimeofday(&now, NULL); tv.sec -> segundos tv.usec -> microsegunds. Necesito milisegundos.
 
 
 // t_philosopher: cada filósofo tiene su info
