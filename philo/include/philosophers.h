@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bvarea-k <bvarea-k@student.42malaga.c      +#+  +:+       +#+        */
+/*   By: bvarea-k <bvarea-k@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 10:29:01 by bvarea-k          #+#    #+#             */
-/*   Updated: 2025/10/15 10:29:03 by bvarea-k         ###   ########.fr       */
+/*   Updated: 2025/10/22 11:48:34 by bvarea-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,13 @@
 
 # include <stdio.h>
 # include <unistd.h>
+# include <pthread.h>
+
+# define	ERROR_ARGS			1
+# define	ERROR_NUMBER		2
+# define	ERROR_PHILO_NUMBER	3
+
+
 
 typedef struct s_table
 {
@@ -39,5 +46,8 @@ int				meals_eaten;//cuántas veces ha comido
 pthread_mutex_t	*mutex_eat;//proteger acceso a last_meal y meals_eaten, evitar condiciones de carrera
 t_table			*table; //puntero a estructura general
 } t_philo;
+
+void	ft_init_table(int ac, char **av, t_table *table);
+int		ft_checker(char **av);
 
 #endif

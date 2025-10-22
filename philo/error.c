@@ -1,29 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bvarea-k <bvarea-k@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/15 10:23:36 by bvarea-k          #+#    #+#             */
-/*   Updated: 2025/10/22 11:47:45 by bvarea-k         ###   ########.fr       */
+/*   Created: 2025/10/22 11:31:49 by bvarea-k          #+#    #+#             */
+/*   Updated: 2025/10/22 11:51:02 by bvarea-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int	main(int ac, char **av)
+void	ft_print_error(int error_n)
 {
-	t_table	table;
-	if (ac != 5 && ac != 6)
-	{
-		ft_print_error(ERROR_ARGS);
-		return (1);
-	}
-	if (!ft_checker(av));
-		return 1;
-	ft_init_table(ac, av, &table);
-
-	//TO DO: inicializar filósofoa y crear hilos
-	return (0);
+	if (error_n == ERROR_ARGS)
+		prinft("Invalid number of arguments.\n");
+	else if (error_n == ERROR_NUMBER)
+		prinft("All arguments must be numbers between 1 and 200.\n");
+	else if (error_n == ERROR_PHILO_NUMBER)
+		prinft("There must be at least 1 philosopher.\n");
+	
 }
