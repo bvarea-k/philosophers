@@ -12,6 +12,14 @@
 
 #include "philosophers.h"
 
+static long ft_get_time(void)
+{
+	struct timeval	time;
+
+	gettimeofday(&time, NULL);
+	return (time.tv_sec * 1000 + time.tv_usec / 1000);
+}
+
 int	ft_init_table(int ac, char **av, t_table *table)
 {
 	int	i;
@@ -29,6 +37,7 @@ int	ft_init_table(int ac, char **av, t_table *table)
 	if (ac == 6)
 		table->must_eat = atol(av[5]);
 	table->dead = 0;
+	table-> start_time = ft_get_time();
 	table->forks = malloc(table->n_philo * sizeof(pthread_mutex_t));
 	if (!table->forks)
 		return (0);
@@ -40,4 +49,7 @@ int	ft_init_table(int ac, char **av, t_table *table)
 	return (1);
 }
 
-//int	init_philo(
+int	init_philo(t_philo)
+{
+	
+}
