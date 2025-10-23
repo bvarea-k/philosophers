@@ -6,7 +6,7 @@
 /*   By: bvarea-k <bvarea-k@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 10:29:01 by bvarea-k          #+#    #+#             */
-/*   Updated: 2025/10/23 13:06:52 by bvarea-k         ###   ########.fr       */
+/*   Updated: 2025/10/23 16:52:49 by bvarea-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,11 @@ typedef struct s_philo
 	t_table			*table; //puntero a estructura general
 }	t_philo;
 
-int		ft_init_table(int ac, char **av, t_table *table);
 int		ft_checker(char **av);
 void	ft_print_error(int error_n);
 long	ft_atol(const char *nptr);
+int		ft_init_table(int ac, char **av, t_table *table);
+int		ft_init_philo(t_table *table);
+int		ft_init_mutex(t_table *table);
 
 #endif
