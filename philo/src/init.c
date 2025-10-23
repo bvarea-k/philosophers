@@ -6,13 +6,13 @@
 /*   By: bvarea-k <bvarea-k@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/22 10:40:23 by bvarea-k          #+#    #+#             */
-/*   Updated: 2025/10/22 13:34:13 by bvarea-k         ###   ########.fr       */
+/*   Updated: 2025/10/23 11:38:14 by bvarea-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-static long ft_get_time(void)
+static long	ft_get_time(void)
 {
 	struct timeval	time;
 
@@ -25,8 +25,8 @@ int	ft_init_table(int ac, char **av, t_table *table)
 	int	i;
 
 	i = 0;
-	table->n_philo = atol(av[1]);
-	if (table->n_philo < 1)
+	table->n_philos = atol(av[1]);
+	if (table->n_philos < 1)
 	{
 		ft_print_error(ERROR_PHILO_NUMBER);
 		return (0);
@@ -37,11 +37,11 @@ int	ft_init_table(int ac, char **av, t_table *table)
 	if (ac == 6)
 		table->must_eat = atol(av[5]);
 	table->dead = 0;
-	table-> start_time = ft_get_time();
-	table->forks = malloc(table->n_philo * sizeof(pthread_mutex_t));
+	table->start_time = ft_get_time();
+	table->forks = malloc(table->n_philos * sizeof(pthread_mutex_t));
 	if (!table->forks)
 		return (0);
-	while (i < table->n_philo)
+	while (i < table->n_philos)
 	{
 		pthread_mutex_init(&table->forks[i], NULL);
 		i++;
@@ -49,7 +49,12 @@ int	ft_init_table(int ac, char **av, t_table *table)
 	return (1);
 }
 
-int	init_philo(t_philo)
+int	init_philo(t_table *table)
 {
+	int	i;
+
+	i = 0;
+	table->philos = malloc(table->n_philos * sizeof(t_philo));
+	if (!table->philos)
 	
 }

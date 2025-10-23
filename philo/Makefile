@@ -51,7 +51,7 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c | DIRS
 
 clean:
 	@rm -rf $(OBJ_DIR)
-	@echo "$(RED)[CLEAN] Object files removed$(DEF_COLOR)"
+	@echo "$(RED)Object files removed$(DEF_COLOR)"
 
 fclean: clean
 	@rm -f $(NAME)

@@ -6,7 +6,7 @@
 /*   By: bvarea-k <bvarea-k@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 10:23:36 by bvarea-k          #+#    #+#             */
-/*   Updated: 2025/10/22 13:59:34 by bvarea-k         ###   ########.fr       */
+/*   Updated: 2025/10/23 10:57:22 by bvarea-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,8 @@
 int	main(int ac, char **av)
 {
 	t_table	table;
-	t_philo	philo;
 
-	table.forks= NULL;
+	table.forks = NULL;
 	if (ac != 5 && ac != 6)
 	{
 		ft_print_error(ERROR_ARGS);
@@ -30,9 +29,9 @@ int	main(int ac, char **av)
 		ft_free_table(&table);
 		return (1);
 	}
-	if (!ft_init_philo)
+	if (!ft_init_philo(&table))
 	{
-		//free_filo??
+		ft_free_table(&table);
 		return (1);
 	}
 	

@@ -6,7 +6,7 @@
 /*   By: bvarea-k <bvarea-k@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/22 14:04:05 by bvarea-k          #+#    #+#             */
-/*   Updated: 2025/10/22 14:05:12 by bvarea-k         ###   ########.fr       */
+/*   Updated: 2025/10/23 13:09:45 by bvarea-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_free_table(t_table *table)
 	if (!table || !table->forks)
 		return ;
 	i = 0;
-	while (i < table->n_philo)
+	while (i < table->n_philos)
 	{
 		pthread_mutex_destroy(&table->forks[i]);
 		i++;
