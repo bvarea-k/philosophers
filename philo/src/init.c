@@ -6,7 +6,7 @@
 /*   By: bvarea-k <bvarea-k@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/22 10:40:23 by bvarea-k          #+#    #+#             */
-/*   Updated: 2025/10/23 16:52:31 by bvarea-k         ###   ########.fr       */
+/*   Updated: 2025/10/24 11:51:24 by bvarea-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,17 @@ static long	ft_get_time(void)
 
 int	ft_init_table(int ac, char **av, t_table *table)
 {
-	int	i;
-
-	i = 0;
-	table->n_philos = atol(av[1]);
+	table->n_philos = ft_atol(av[1]);
 	if (table->n_philos < 1)
 	{
 		ft_print_error(ERROR_PHILO_NUMBER);
 		return (0);
 	}
-	table->time_to_die = atol(av[2]);
-	table->time_to_eat = atol(av[3]);
-	table->time_to_sleep = atol(av[4]);
+	table->time_to_die = ft_atol(av[2]);
+	table->time_to_eat = ft_atol(av[3]);
+	table->time_to_sleep = ft_atol(av[4]);
 	if (ac == 6)
-		table->must_eat = atol(av[5]);
+		table->must_eat = ft_atol(av[5]);
 	table->dead = 0;
 	table->start_time = ft_get_time();
 	table->forks = malloc(table->n_philos * sizeof(pthread_mutex_t));
@@ -80,9 +77,14 @@ int	ft_init_mutex(t_table *table)
 	i = 0;
 	while (i < table->n_philos)
 	{
-		if (pthread_mutex_init(table->philos[i].mutex_eat, NULL))// devuelve 0 si se inició bien
+		if (pthread_mutex_init(&table->philos[i].mutex_eat, NULL))// devuelve 0 si se inició bien
 			return (0);
 		i++;
 	}
 	return (1);
+}
+
+int	create_thread(t_table *table)
+{
+	
 }
