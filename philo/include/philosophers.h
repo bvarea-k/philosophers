@@ -6,7 +6,7 @@
 /*   By: bvarea-k <bvarea-k@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 10:29:01 by bvarea-k          #+#    #+#             */
-/*   Updated: 2025/10/24 13:59:14 by bvarea-k         ###   ########.fr       */
+/*   Updated: 2025/10/24 16:42:40 by bvarea-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,13 @@ typedef struct s_philo
 int		ft_checker(char **av);
 void	ft_print_error(int error_n);
 long	ft_atol(const char *nptr);
+long	ft_get_time(void);
 int		ft_init_table(int ac, char **av, t_table *table);
 int		ft_init_philo(t_table *table);
 int		ft_init_mutex(t_table *table);
 void	ft_free_table(t_table *table);
 void	ft_create_thread(t_table *table);
+void	*ft_routine(void *arg);
+int		ft_are_alive(t_table *table);
 
 #endif
