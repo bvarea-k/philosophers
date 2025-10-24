@@ -6,7 +6,7 @@
 /*   By: bvarea-k <bvarea-k@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 10:23:36 by bvarea-k          #+#    #+#             */
-/*   Updated: 2025/10/23 16:55:37 by bvarea-k         ###   ########.fr       */
+/*   Updated: 2025/10/24 13:25:36 by bvarea-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,7 @@ int	main(int ac, char **av)
 		ft_free_table(&table);
 		return (1);
 	}
-	
-	
+	ft_create_thread(&table);
 	
 
 	//TO DO: inicializar filósofoa y crear hilos

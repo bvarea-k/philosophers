@@ -6,7 +6,7 @@
 /*   By: bvarea-k <bvarea-k@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 10:29:01 by bvarea-k          #+#    #+#             */
-/*   Updated: 2025/10/24 11:35:19 by bvarea-k         ###   ########.fr       */
+/*   Updated: 2025/10/24 13:59:14 by bvarea-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,9 @@ typedef struct s_table
 typedef struct s_philo
 {
 	int				id_philo; // identificador del folósofo
-	//pthread_mutex_t	*r_fork; //mutex del tenedor derecho
-	//pthread_mutex_t	*l_fork; // mutex del tenedor izquierdo
 	long			last_meal;//cuando el philo empezó a comer por última vez
 	int				meals_eaten;//cuántas veces ha comido
+	pthread_t		thread; //Los hilos
 	pthread_mutex_t	mutex_eat;//proteger acceso a last_meal y meals_eaten, evitar condiciones de carrera
 	t_table			*table; //puntero a estructura general
 }	t_philo;
@@ -57,5 +56,6 @@ int		ft_init_table(int ac, char **av, t_table *table);
 int		ft_init_philo(t_table *table);
 int		ft_init_mutex(t_table *table);
 void	ft_free_table(t_table *table);
+void	ft_create_thread(t_table *table);
 
 #endif
