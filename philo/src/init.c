@@ -6,7 +6,7 @@
 /*   By: bvarea-k <bvarea-k@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/22 10:40:23 by bvarea-k          #+#    #+#             */
-/*   Updated: 2025/10/24 14:01:05 by bvarea-k         ###   ########.fr       */
+/*   Updated: 2025/10/24 16:15:39 by bvarea-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,16 @@ int	ft_init_mutex(t_table *table)
 	return (1);
 }
 
+void	*ft_routine(void *arg)
+{
+	t_philo	*philo;
+
+	philo = (t_philo *)arg;
+	if (philo->table->time_to_die == 0) //si el tiempo para morir es 0, paro.
+		return (NULL);
+}
+
+
 void	ft_create_thread(t_table *table)
 {
 	int	i;
@@ -91,7 +101,7 @@ void	ft_create_thread(t_table *table)
 	i = 0;
 	while (i < table->n_philos)
 	{
-		if (pthread_create(&table->philos[i].thread, NULL, ft_routine, &table->philos[i]))
+		if (pthread_create(&table->philos[i].thread, NULL, ft_routine, &table->philos[i])) //devuelve 0 si fue bien
 			return (ft_print_error(ERROR_PHILO));
 		i++;
 	}
