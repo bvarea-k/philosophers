@@ -6,7 +6,7 @@
 /*   By: bvarea-k <bvarea-k@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/22 14:04:05 by bvarea-k          #+#    #+#             */
-/*   Updated: 2025/10/24 16:56:24 by bvarea-k         ###   ########.fr       */
+/*   Updated: 2025/10/25 15:26:13 by bvarea-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,5 @@ void	ft_free_table(t_table *table)
 		}
 		free(table->philos);
 	}
+	pthread_mutex_destroy(&table->mutex_dead); //solo una vez xq no es array.
 }

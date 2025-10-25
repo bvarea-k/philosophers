@@ -6,7 +6,7 @@
 /*   By: bvarea-k <bvarea-k@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 10:29:01 by bvarea-k          #+#    #+#             */
-/*   Updated: 2025/10/24 16:42:40 by bvarea-k         ###   ########.fr       */
+/*   Updated: 2025/10/25 16:27:02 by bvarea-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # define ERROR_NUMBER		2
 # define ERROR_PHILO_NUMBER	3
 # define ERROR_PHILO		4
+# define ERROR_MONITOR		5
 
 typedef struct s_philo	t_philo;
 
@@ -36,6 +37,7 @@ typedef struct s_table
 	int				dead; //flag de muerto
 	int				start_time; //tiempo del inicio de la sesión
 	pthread_mutex_t	*forks; //array de mutexes de tenedores
+	pthread_mutex_t	mutex_dead; //proteger acceso a dead
 	t_philo			*philos;
 }	t_table;
 
@@ -59,6 +61,7 @@ int		ft_init_mutex(t_table *table);
 void	ft_free_table(t_table *table);
 void	ft_create_thread(t_table *table);
 void	*ft_routine(void *arg);
-int		ft_are_alive(t_table *table);
+void	*ft_monitor(void *arg);
+void	ft_take_forks(t_philo *philo);
 
 #endif

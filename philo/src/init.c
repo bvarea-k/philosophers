@@ -6,7 +6,7 @@
 /*   By: bvarea-k <bvarea-k@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/22 10:40:23 by bvarea-k          #+#    #+#             */
-/*   Updated: 2025/10/24 16:42:16 by bvarea-k         ###   ########.fr       */
+/*   Updated: 2025/10/25 15:43:32 by bvarea-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,18 +81,35 @@ int	ft_init_mutex(t_table *table)
 			return (0);
 		i++;
 	}
+	i = 0;
+	while (i < table->n_philos)
+	{
+		if (pthread_mutex_init(&table->mutex_dead, NULL))// devuelve 0 si se inició bien
+			return (0);
+		i++;
+	}
 	return (1);
 }
 
 void	ft_create_thread(t_table *table)
 {
-	int	i;
+	int			i;
+	pthread_t	monitor;
 
 	i = 0;
 	while (i < table->n_philos)
 	{
 		if (pthread_create(&table->philos[i].thread, NULL, ft_routine, &table->philos[i])) //devuelve 0 si fue bien
 			return (ft_print_error(ERROR_PHILO));
+		i++;
+	}
+	if (pthread_create(&monitor, NULL, ft_monitor, table)) //devuelve 0 si fue bien. No puedo pasarle nada  ala función xq necesita que sea void *
+			return (ft_print_error(ERROR_MONITOR));
+	pthread_join(monitor, NULL); //espera a que el monitor termine (comen o alguien muere)
+	i = 0;
+	while (i < table->n_philos)
+	{
+		pthread_join(table->philos[i].thread, NULL);//el monitor espera a que los filos terminen su rutina
 		i++;
 	}
 }

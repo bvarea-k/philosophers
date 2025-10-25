@@ -6,7 +6,7 @@
 /*   By: bvarea-k <bvarea-k@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/22 11:31:49 by bvarea-k          #+#    #+#             */
-/*   Updated: 2025/10/23 16:19:57 by bvarea-k         ###   ########.fr       */
+/*   Updated: 2025/10/25 15:29:33 by bvarea-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,7 @@ void	ft_print_error(int error_n)
 		printf("All arguments must be numbers between 1 and 2147483647.\n");
 	else if (error_n == ERROR_PHILO)
 		printf("Error creating philosopher.\n");
+		else if (error_n == ERROR_MONITOR)
+		printf("Error creating monitor thread.\n");
 		
 }
