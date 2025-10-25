@@ -6,7 +6,7 @@
 /*   By: bvarea-k <bvarea-k@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 10:29:01 by bvarea-k          #+#    #+#             */
-/*   Updated: 2025/10/25 16:27:02 by bvarea-k         ###   ########.fr       */
+/*   Updated: 2025/10/25 16:39:51 by bvarea-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,5 +63,6 @@ void	ft_create_thread(t_table *table);
 void	*ft_routine(void *arg);
 void	*ft_monitor(void *arg);
 void	ft_take_forks(t_philo *philo);
+void	ft_eat(t_philo *philo);
 
 #endif

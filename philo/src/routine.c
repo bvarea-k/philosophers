@@ -6,7 +6,7 @@
 /*   By: bvarea-k <bvarea-k@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 16:32:00 by bvarea-k          #+#    #+#             */
-/*   Updated: 2025/10/25 16:26:38 by bvarea-k         ###   ########.fr       */
+/*   Updated: 2025/10/25 16:52:45 by bvarea-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,7 @@ void	*ft_routine(void *arg)
 	t_philo	*philo;
 
 	philo = (t_philo *)arg;
-	if (philo->table->time_to_die == 0) //si el tiempo para morir es 0, paro.
-		return (NULL);
+	philo->last_meal = ft_get_time();//tiempo de la última comida
 	while (1)
 	{
 		pthread_mutex_lock(&philo->table->mutex_dead);
@@ -93,10 +92,10 @@ void	*ft_routine(void *arg)
 			break;
 		}
 		pthread_mutex_unlock(&philo->table->mutex_dead);
-		ft_take_forks(philo);
-		//come
-		//suelta el tenedor
-		//duerme
+		ft_take_forks(philo); //TO DO: decidir si la llamo desde aquí o desde comer
+		ft_eat(philo);
+		//ft_sleep(philo);
+		printf("%ld %d is thinking\n", ft_get_time() - philo->table->start_time, philo->id_philo);
 	}
 	return (NULL); //probar cuando pueda probar el programa
 }
