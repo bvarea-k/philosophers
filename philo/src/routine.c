@@ -6,7 +6,7 @@
 /*   By: bvarea-k <bvarea-k@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 16:32:00 by bvarea-k          #+#    #+#             */
-/*   Updated: 2025/10/25 16:52:45 by bvarea-k         ###   ########.fr       */
+/*   Updated: 2025/10/25 17:07:23 by bvarea-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,8 @@ void	*ft_routine(void *arg)
 		pthread_mutex_unlock(&philo->table->mutex_dead);
 		ft_take_forks(philo); //TO DO: decidir si la llamo desde aquí o desde comer
 		ft_eat(philo);
+		if (philo->table->dead) //si está muerto, me salgo
+			break ;
 		//ft_sleep(philo);
 		printf("%ld %d is thinking\n", ft_get_time() - philo->table->start_time, philo->id_philo);
 	}
