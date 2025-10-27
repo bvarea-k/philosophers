@@ -6,43 +6,23 @@
 /*   By: bvarea-k <bvarea-k@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/25 15:53:12 by bvarea-k          #+#    #+#             */
-/*   Updated: 2025/10/27 09:25:11 by bvarea-k         ###   ########.fr       */
+/*   Updated: 2025/10/27 10:10:19 by bvarea-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-// coger tenedor, comer, soltar tenedor, dormir, pensar??????
-
-/*void	take_forks(t_philo *philo) impares hacen todo y los pares espperan
-{
-	if (philo->id_philo % 2 != 0) //si es impar
-	{
-		pthread_mutex_lock(&philo->table->forks[philo->id_philo - 1]);
-		printf("%ld %d has taken the left fork\n", ft_get_time() - philo->table->start_time, philo->id_philo);
-		pthread_mutex_lock(&philo->table->forks[philo->id_philo % philo->table->n_philos]);
-		printf("%ld %d has taken the right fork\n", ft_get_time() - philo->table->start_time, philo->id_philo);
-	}
-	else
-	usleep(1000);
-}*/
-
-/*void	ft_take_forks(t_philo *philo)
-{
-	if (philo->id_philo % 2 == 0)
-		usleep(1000); // los pares esperan
-	pthread_mutex_lock(&philo->table->forks[philo->id_philo - 1]);
-	printf("%ld %d has taken left fork\n", ft_get_time() - philo->table->start_time, philo->id_philo);
-	pthread_mutex_lock(&philo->table->forks[philo->id_philo % philo->table->n_philos]);
-	printf("%ld %d has taken right fork\n", ft_get_time() - philo->table->start_time, philo->id_philo);
-}*/
-
 void	ft_take_forks(t_philo *philo)
 {
+	pthread_mutex_lock(&philo->table->mutex_dead);
+	if (philo->table->dead)
+	{
+		pthread_mutex_unlock(&philo->table->mutex_dead);
+		return ;
+	}
+	pthread_mutex_unlock(&philo->table->mutex_dead);
 	if (philo->id_philo % 2 != 0) // impares cogen primero el izquiero
 	{
-		if (philo->table->dead) //si está muerto, me salgo
-			return ;
 		pthread_mutex_lock(&philo->table->forks[philo->id_philo - 1]);
 		printf("%ld %d has taken the left fork\n",
 			ft_get_time() - philo->table->start_time, philo->id_philo);
@@ -53,8 +33,6 @@ void	ft_take_forks(t_philo *philo)
 	}
 	else // pares cogen primero el derecho
 	{
-		if (philo->table->dead) //si está muerto, me salgo
-			return ;
 		pthread_mutex_lock(&philo->table->forks[philo->id_philo
 			% philo->table->n_philos]);
 		printf("%ld %d has taken the right fork\n",
@@ -65,10 +43,33 @@ void	ft_take_forks(t_philo *philo)
 	}
 }
 
+static void	ft_release_forks(t_philo *philo)
+{
+	int	next_fork;
+
+	next_fork = philo->id_philo % philo->table->n_philos;
+	if (philo->id_philo % 2 != 0)
+	{
+		pthread_mutex_unlock(&philo->table->forks[philo->id_philo - 1]);
+		pthread_mutex_unlock(&philo->table->forks[next_fork]);
+	}
+	else
+	{
+		pthread_mutex_unlock(&philo->table->forks[next_fork]);
+		pthread_mutex_unlock(&philo->table->forks[philo->id_philo - 1]);
+	}
+}
+
 void	ft_eat(t_philo *philo)
 {
-	if (philo->table->dead) //si está muerto, me salgo
+	pthread_mutex_lock(&philo->table->mutex_dead);
+	if (philo->table->dead)
+	{
+		pthread_mutex_unlock(&philo->table->mutex_dead);
+		ft_release_forks(philo);
 		return ;
+	}
+	pthread_mutex_unlock(&philo->table->mutex_dead);
 	pthread_mutex_lock(&philo->mutex_eat);
 	philo->last_meal = ft_get_time();
 	philo->meals_eaten++;
@@ -76,29 +77,28 @@ void	ft_eat(t_philo *philo)
 	printf("%ld %d is eating\n", ft_get_time() - philo->table->start_time,
 		philo->id_philo);
 	usleep(philo->table->time_to_eat * 1000);
-	if (philo->id_philo % 2 != 0) // liberar tenedores en el mismo orden que se cogieron
-	{
-		pthread_mutex_unlock(&philo->table->forks[philo->id_philo - 1]);
-		pthread_mutex_unlock(&philo->table->forks[philo->id_philo
-			% philo->table->n_philos]);
-	}
-	else
-	{
-		pthread_mutex_unlock(&philo->table->forks[philo->id_philo
-			% philo->table->n_philos]);
-		pthread_mutex_unlock(&philo->table->forks[philo->id_philo - 1]);
-	}
+	ft_release_forks(philo);
 }
 
 void	ft_sleep(t_philo *philo)
 {
-	if (philo->table->dead) //si está muerto, me salgo
+	pthread_mutex_lock(&philo->table->mutex_dead);
+	if (philo->table->dead)
+	{
+		pthread_mutex_unlock(&philo->table->mutex_dead);
 		return ;
+	}
+	pthread_mutex_unlock(&philo->table->mutex_dead);
 	printf("%ld %d is sleeping\n",
 		ft_get_time() - philo->table->start_time, philo->id_philo);
 	usleep(philo->table->time_to_sleep * 1000);
+	pthread_mutex_lock(&philo->table->mutex_dead);
 	if (philo->table->dead)
+	{
+		pthread_mutex_unlock(&philo->table->mutex_dead);
 		return ;
+	}
+	pthread_mutex_unlock(&philo->table->mutex_dead);
 	printf("%ld %d is thinking\n",
 		ft_get_time() - philo->table->start_time, philo->id_philo);
 }

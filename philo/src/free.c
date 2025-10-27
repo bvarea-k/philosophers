@@ -6,18 +6,16 @@
 /*   By: bvarea-k <bvarea-k@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/22 14:04:05 by bvarea-k          #+#    #+#             */
-/*   Updated: 2025/10/25 15:26:13 by bvarea-k         ###   ########.fr       */
+/*   Updated: 2025/10/27 10:47:39 by bvarea-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-void	ft_free_table(t_table *table)
+static void	ft_free_forks(t_table *table)
 {
 	int	i;
 
-	if (!table)
-		return ;
 	i = 0;
 	if (table->forks)
 	{
@@ -28,6 +26,15 @@ void	ft_free_table(t_table *table)
 		}
 		free(table->forks);
 	}
+}
+
+void	ft_free_table(t_table *table)
+{
+	int	i;
+
+	if (!table)
+		return ;
+	ft_free_forks(table);
 	i = 0;
 	if (table->philos)
 	{
@@ -38,5 +45,5 @@ void	ft_free_table(t_table *table)
 		}
 		free(table->philos);
 	}
-	pthread_mutex_destroy(&table->mutex_dead); //solo una vez xq no es array.
+	pthread_mutex_destroy(&table->mutex_dead);
 }
