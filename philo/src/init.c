@@ -6,7 +6,7 @@
 /*   By: bvarea-k <bvarea-k@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/22 10:40:23 by bvarea-k          #+#    #+#             */
-/*   Updated: 2025/10/25 15:43:32 by bvarea-k         ###   ########.fr       */
+/*   Updated: 2025/10/27 09:12:41 by bvarea-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	ft_init_philo(t_table *table)
 	{
 		table->philos[i].id_philo = i + 1;
 		table->philos[i].meals_eaten = 0;
-		table->philos[i].last_meal = table->start_time;//su última comida fue cuando iniciamos
+		table->philos[i].last_meal = table->start_time;//última comida cuando iniciamos
 		table->philos[i].table = table;
 		i++;
 	}
@@ -104,7 +104,7 @@ void	ft_create_thread(t_table *table)
 		i++;
 	}
 	if (pthread_create(&monitor, NULL, ft_monitor, table)) //devuelve 0 si fue bien. No puedo pasarle nada  ala función xq necesita que sea void *
-			return (ft_print_error(ERROR_MONITOR));
+		return (ft_print_error(ERROR_MONITOR));
 	pthread_join(monitor, NULL); //espera a que el monitor termine (comen o alguien muere)
 	i = 0;
 	while (i < table->n_philos)

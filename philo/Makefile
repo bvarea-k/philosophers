@@ -6,7 +6,7 @@
 #    By: bvarea-k <bvarea-k@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/22 11:55:23 by bvarea-k          #+#    #+#              #
-#    Updated: 2025/10/25 16:27:10 by bvarea-k         ###   ########.fr        #
+#    Updated: 2025/10/27 09:29:51 by bvarea-k         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ SRC_DIR = src/
 OBJ_DIR = obj/
 INCLUDE = -I include
 
-# Source files (sin extensiones ni path)
+# Source files
 SRC_FILES = main init ft_atol error checker free routine actions
 
 # Full paths
