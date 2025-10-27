@@ -6,7 +6,7 @@
 /*   By: bvarea-k <bvarea-k@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 10:29:01 by bvarea-k          #+#    #+#             */
-/*   Updated: 2025/10/27 09:15:45 by bvarea-k         ###   ########.fr       */
+/*   Updated: 2025/10/27 14:19:04 by bvarea-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ typedef struct s_table
 	int				time_to_sleep; //tiempo que tarda en dormir
 	int				must_eat; //número opcional de veces que comer
 	int				dead; //flag de muerto
-	int				start_time; //tiempo del inicio de la sesión
+	long			start_time; //tiempo del inicio de la sesión
 	pthread_mutex_t	*forks; //array de mutexes de tenedores
 	pthread_mutex_t	mutex_dead; //proteger acceso a dead
 	t_philo			*philos;

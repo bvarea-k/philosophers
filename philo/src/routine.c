@@ -6,7 +6,7 @@
 /*   By: bvarea-k <bvarea-k@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 16:32:00 by bvarea-k          #+#    #+#             */
-/*   Updated: 2025/10/27 12:51:16 by bvarea-k         ###   ########.fr       */
+/*   Updated: 2025/10/27 15:26:15 by bvarea-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,26 +65,21 @@ static void	ft_one_philo(t_philo *philo)
 	{
 		printf("%ld %d has taken the left fork\n",
 			ft_get_time() - philo->table->start_time, philo->id_philo);
+			usleep(philo->table->time_to_die);
 		printf("%ld %d died\n",
 			ft_get_time() - philo->table->start_time, philo->id_philo);
+		pthread_mutex_lock(&philo->table->mutex_dead); //Por qué? Porque mi hilo monitor es el 2nd hilo
+		philo->table->dead = 1;
+		pthread_mutex_unlock(&philo->table->mutex_dead);
 	}
 }
-
-void	*ft_routine(void *arg)
+static void	ft_my_loop(t_philo *philo)
 {
-	t_philo	*philo;
-
-	philo = (t_philo *)arg;
-	philo->last_meal = ft_get_time();
-	ft_one_philo (philo);
 	while (1)
 	{
 		pthread_mutex_lock(&philo->table->mutex_dead);
 		if (philo->table->dead)
-		{
 			pthread_mutex_unlock(&philo->table->mutex_dead);
-			break ;
-		}
 		pthread_mutex_unlock(&philo->table->mutex_dead);
 		ft_take_forks(philo);
 		ft_eat(philo);
@@ -96,5 +91,19 @@ void	*ft_routine(void *arg)
 		printf("%ld %d is thinking\n",
 			ft_get_time() - philo->table->start_time, philo->id_philo);
 	}
+}
+
+void	*ft_routine(void *arg)
+{
+	t_philo	*philo;
+
+	philo = (t_philo *)arg;
+	philo->last_meal = ft_get_time();
+	if (philo->table->n_philos == 1)
+	{
+		ft_one_philo(philo);
+		return (NULL);
+	}
+	ft_my_loop(philo);
 	return (NULL);
 }

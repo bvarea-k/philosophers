@@ -6,7 +6,7 @@
 /*   By: bvarea-k <bvarea-k@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/25 15:53:12 by bvarea-k          #+#    #+#             */
-/*   Updated: 2025/10/27 12:45:16 by bvarea-k         ###   ########.fr       */
+/*   Updated: 2025/10/27 15:10:22 by bvarea-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	ft_eat(t_philo *philo)
 	pthread_mutex_unlock(&philo->mutex_eat);
 	printf("%ld %d is eating\n", ft_get_time() - philo->table->start_time,
 		philo->id_philo);
-	usleep(philo->table->time_to_eat * 1000);
+	usleep(philo->table->time_to_eat * 100);
 	ft_release_forks(philo);
 }
 
@@ -91,7 +91,7 @@ void	ft_sleep(t_philo *philo)
 	pthread_mutex_unlock(&philo->table->mutex_dead);
 	printf("%ld %d is sleeping\n",
 		ft_get_time() - philo->table->start_time, philo->id_philo);
-	usleep(philo->table->time_to_sleep * 1000);
+	usleep(philo->table->time_to_sleep * 100);
 	pthread_mutex_lock(&philo->table->mutex_dead);
 	if (philo->table->dead)
 	{
@@ -99,6 +99,4 @@ void	ft_sleep(t_philo *philo)
 		return ;
 	}
 	pthread_mutex_unlock(&philo->table->mutex_dead);
-	printf("%ld %d is thinking\n",
-		ft_get_time() - philo->table->start_time, philo->id_philo);
 }
