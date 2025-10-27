@@ -6,7 +6,7 @@
 /*   By: bvarea-k <bvarea-k@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/22 10:40:23 by bvarea-k          #+#    #+#             */
-/*   Updated: 2025/10/27 15:04:17 by bvarea-k         ###   ########.fr       */
+/*   Updated: 2025/10/27 15:42:22 by bvarea-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int	ft_init_mutex(t_table *table)
 	}
 	i = 0;
 	if (pthread_mutex_init(&table->mutex_dead, NULL))
-			return (0);
+		return (0);
 	return (1);
 }
 

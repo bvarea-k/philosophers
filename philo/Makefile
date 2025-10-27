@@ -6,7 +6,7 @@
 #    By: bvarea-k <bvarea-k@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/22 11:55:23 by bvarea-k          #+#    #+#              #
-#    Updated: 2025/10/27 09:29:51 by bvarea-k         ###   ########.fr        #
+#    Updated: 2025/10/27 16:09:46 by bvarea-k         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ OBJ_DIR = obj/
 INCLUDE = -I include
 
 # Source files
-SRC_FILES = main init ft_atol error checker free routine actions
+SRC_FILES = main init ft_atol error checker free routine actions utils
 
 # Full paths
 SRCS = $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))

@@ -6,7 +6,7 @@
 /*   By: bvarea-k <bvarea-k@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 10:29:01 by bvarea-k          #+#    #+#             */
-/*   Updated: 2025/10/27 14:19:04 by bvarea-k         ###   ########.fr       */
+/*   Updated: 2025/10/27 16:09:39 by bvarea-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,26 +29,26 @@ typedef struct s_philo	t_philo;
 
 typedef struct s_table
 {
-	int				n_philos; //número de filósofos. Define el tamaño
-	int				time_to_die; //tiempo que puede pasar sin comer
-	int				time_to_eat; //tiempo que tarda en comer
-	int				time_to_sleep; //tiempo que tarda en dormir
-	int				must_eat; //número opcional de veces que comer
-	int				dead; //flag de muerto
-	long			start_time; //tiempo del inicio de la sesión
-	pthread_mutex_t	*forks; //array de mutexes de tenedores
-	pthread_mutex_t	mutex_dead; //proteger acceso a dead
+	int				n_philos;
+	int				time_to_die;
+	int				time_to_eat;
+	int				time_to_sleep;
+	int				must_eat;
+	int				dead;
+	long			start_time;
+	pthread_mutex_t	*forks;
+	pthread_mutex_t	mutex_dead;
 	t_philo			*philos;
 }	t_table;
 
 typedef struct s_philo
 {
-	int				id_philo; // identificador del folósofo
-	long			last_meal;//cuando el philo empezó a comer por última vez
-	int				meals_eaten;//cuántas veces ha comido
-	pthread_t		thread; //Los hilos
-	pthread_mutex_t	mutex_eat;//proteger acceso a last_meal y meals_eaten, evitar condiciones de carrera
-	t_table			*table; //puntero a estructura general
+	int				id_philo;
+	long			last_meal;
+	int				meals_eaten;
+	pthread_t		thread;
+	pthread_mutex_t	mutex_eat;
+	t_table			*table;
 }	t_philo;
 
 int		ft_checker(char **av);
@@ -65,5 +65,6 @@ void	*ft_monitor(void *arg);
 void	ft_take_forks(t_philo *philo);
 void	ft_eat(t_philo *philo);
 void	ft_sleep(t_philo *philo);
+int		ft_all_ate(t_table *table);
 
 #endif
