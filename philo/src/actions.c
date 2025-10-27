@@ -6,7 +6,7 @@
 /*   By: bvarea-k <bvarea-k@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/25 15:53:12 by bvarea-k          #+#    #+#             */
-/*   Updated: 2025/10/27 16:44:22 by bvarea-k         ###   ########.fr       */
+/*   Updated: 2025/10/27 17:04:39 by bvarea-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,10 @@ void	ft_take_forks(t_philo *philo)
 		printf("%ld %d has taken the left fork\n",
 			ft_get_time() - philo->table->start_time, philo->id_philo);
 		if (ft_is_dead(philo))
+		{
+			pthread_mutex_unlock(&philo->table->forks[philo->id_philo - 1]);
 			return ;
+		}
 		pthread_mutex_lock(&philo->table->forks[philo->id_philo
 			% philo->table->n_philos]);
 		printf("%ld %d has taken the right fork\n",
@@ -48,12 +51,18 @@ void	ft_take_forks(t_philo *philo)
 		printf("%ld %d has taken the right fork\n",
 			ft_get_time() - philo->table->start_time, philo->id_philo);
 		if (ft_is_dead(philo))
+		{
+			pthread_mutex_unlock(&philo->table->forks[philo->id_philo
+			% philo->table->n_philos]);
 			return ;
+		}
 		pthread_mutex_lock(&philo->table->forks[philo->id_philo - 1]);
 		printf("%ld %d has taken the left fork\n",
 			ft_get_time() - philo->table->start_time, philo->id_philo);
 	}
 }
+
+
 
 static void	ft_release_forks(t_philo *philo)
 {
