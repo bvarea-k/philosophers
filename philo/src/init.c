@@ -6,7 +6,7 @@
 /*   By: bvarea-k <bvarea-k@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/22 10:40:23 by bvarea-k          #+#    #+#             */
-/*   Updated: 2025/10/27 09:12:41 by bvarea-k         ###   ########.fr       */
+/*   Updated: 2025/10/27 12:37:30 by bvarea-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,11 @@ int	ft_init_philo(t_table *table)
 		ft_print_error(ERROR_PHILO);
 		return (0);
 	}
-	while (i < table-> n_philos) // recorrer todos los filósofos
+	while (i < table-> n_philos)
 	{
 		table->philos[i].id_philo = i + 1;
 		table->philos[i].meals_eaten = 0;
-		table->philos[i].last_meal = table->start_time;//última comida cuando iniciamos
+		table->philos[i].last_meal = table->start_time;
 		table->philos[i].table = table;
 		i++;
 	}
@@ -77,14 +77,14 @@ int	ft_init_mutex(t_table *table)
 	i = 0;
 	while (i < table->n_philos)
 	{
-		if (pthread_mutex_init(&table->philos[i].mutex_eat, NULL))// devuelve 0 si se inició bien
+		if (pthread_mutex_init(&table->philos[i].mutex_eat, NULL))
 			return (0);
 		i++;
 	}
 	i = 0;
 	while (i < table->n_philos)
 	{
-		if (pthread_mutex_init(&table->mutex_dead, NULL))// devuelve 0 si se inició bien
+		if (pthread_mutex_init(&table->mutex_dead, NULL))
 			return (0);
 		i++;
 	}
@@ -99,17 +99,18 @@ void	ft_create_thread(t_table *table)
 	i = 0;
 	while (i < table->n_philos)
 	{
-		if (pthread_create(&table->philos[i].thread, NULL, ft_routine, &table->philos[i])) //devuelve 0 si fue bien
+		if (pthread_create(&table->philos[i].thread,
+				NULL, ft_routine, &table->philos[i]))
 			return (ft_print_error(ERROR_PHILO));
 		i++;
 	}
-	if (pthread_create(&monitor, NULL, ft_monitor, table)) //devuelve 0 si fue bien. No puedo pasarle nada  ala función xq necesita que sea void *
+	if (pthread_create(&monitor, NULL, ft_monitor, table))
 		return (ft_print_error(ERROR_MONITOR));
-	pthread_join(monitor, NULL); //espera a que el monitor termine (comen o alguien muere)
+	pthread_join(monitor, NULL);
 	i = 0;
 	while (i < table->n_philos)
 	{
-		pthread_join(table->philos[i].thread, NULL);//el monitor espera a que los filos terminen su rutina
+		pthread_join(table->philos[i].thread, NULL);
 		i++;
 	}
 }

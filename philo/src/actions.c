@@ -6,7 +6,7 @@
 /*   By: bvarea-k <bvarea-k@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/25 15:53:12 by bvarea-k          #+#    #+#             */
-/*   Updated: 2025/10/27 10:10:19 by bvarea-k         ###   ########.fr       */
+/*   Updated: 2025/10/27 12:45:16 by bvarea-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_take_forks(t_philo *philo)
 		return ;
 	}
 	pthread_mutex_unlock(&philo->table->mutex_dead);
-	if (philo->id_philo % 2 != 0) // impares cogen primero el izquiero
+	if (philo->id_philo % 2 != 0)
 	{
 		pthread_mutex_lock(&philo->table->forks[philo->id_philo - 1]);
 		printf("%ld %d has taken the left fork\n",
@@ -31,7 +31,7 @@ void	ft_take_forks(t_philo *philo)
 		printf("%ld %d has taken the right fork\n",
 			ft_get_time() - philo->table->start_time, philo->id_philo);
 	}
-	else // pares cogen primero el derecho
+	else
 	{
 		pthread_mutex_lock(&philo->table->forks[philo->id_philo
 			% philo->table->n_philos]);

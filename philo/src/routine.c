@@ -6,13 +6,13 @@
 /*   By: bvarea-k <bvarea-k@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 16:32:00 by bvarea-k          #+#    #+#             */
-/*   Updated: 2025/10/27 09:11:11 by bvarea-k         ###   ########.fr       */
+/*   Updated: 2025/10/27 12:51:16 by bvarea-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-/*int	ft_are_alive(t_table *table)
+static int	ft_check_dead(t_table *table)
 {
 	int		i;
 	long	current_time;
@@ -21,49 +21,32 @@
 	while (i < table->n_philos)
 	{
 		pthread_mutex_lock(&table->philos[i].mutex_eat);
-		current_time = ft_get_time(); //me da el tiempo en milis desde que empezamos
-		if (current_time - table->philos[i].last_meal >= table->time_to_die) // si el tiempo desd que comió es mayor o igual al necesario para morir
+		current_time = ft_get_time();
+		if (current_time - table->philos[i].last_meal >= table->time_to_die)
 		{
-			table->dead = 1; //se muere
-			pthread_mutex_unlock(&table->philos[i].mutex_eat); //desbloqueo
-			printf("%ld %d is dead\n", current_time - table->start_time,
-					table->philos[i].id_philo); //informo a los familiares del fallecimiento
-			return (0);
+			pthread_mutex_unlock(&table->philos[i].mutex_eat);
+			pthread_mutex_lock(&table->mutex_dead);
+			table->dead = 1;
+			pthread_mutex_unlock(&table->mutex_dead);
+			printf("%ld %d died\n", current_time - table->start_time,
+				table->philos[i].id_philo);
+			return (1);
 		}
-		pthread_mutex_unlock(&table->philos[i].mutex_eat); //desbloqueo igual si están vivos
+		pthread_mutex_unlock(&table->philos[i].mutex_eat);
 		i++;
 	}
-	if (table->dead)
-		return (0);
-	return (1);
-}*/
+	return (0);
+}
+
 void	*ft_monitor(void *arg)
 {
 	t_table	*table;
-	int		i;
-	long	current_time;
 
 	table = (t_table *)arg;
 	while (1)
 	{
-		i = 0;
-		while (i < table->n_philos)
-		{
-			pthread_mutex_lock(&table->philos[i].mutex_eat);
-			current_time = ft_get_time();
-			if (current_time - table->philos[i].last_meal >= table->time_to_die)
-			{
-				pthread_mutex_unlock(&table->philos[i].mutex_eat);
-				pthread_mutex_lock(&table->mutex_dead);
-				table->dead = 1;
-				pthread_mutex_unlock(&table->mutex_dead);
-				printf("%ld %d died\n", current_time - table->start_time,
-					table->philos[i].id_philo);
-				return (NULL);
-			}
-			pthread_mutex_unlock(&table->philos[i].mutex_eat);
-			i++;
-		}
+		if (ft_check_dead(table))
+			break ;
 		pthread_mutex_lock(&table->mutex_dead);
 		if (table->dead)
 		{
@@ -71,9 +54,20 @@ void	*ft_monitor(void *arg)
 			break ;
 		}
 		pthread_mutex_unlock(&table->mutex_dead);
-		usleep(1000);
+		usleep(100);
 	}
 	return (NULL);
+}
+
+static void	ft_one_philo(t_philo *philo)
+{
+	if (philo->table->n_philos == 1)
+	{
+		printf("%ld %d has taken the left fork\n",
+			ft_get_time() - philo->table->start_time, philo->id_philo);
+		printf("%ld %d died\n",
+			ft_get_time() - philo->table->start_time, philo->id_philo);
+	}
 }
 
 void	*ft_routine(void *arg)
@@ -81,7 +75,8 @@ void	*ft_routine(void *arg)
 	t_philo	*philo;
 
 	philo = (t_philo *)arg;
-	philo->last_meal = ft_get_time();//tiempo de la última comida
+	philo->last_meal = ft_get_time();
+	ft_one_philo (philo);
 	while (1)
 	{
 		pthread_mutex_lock(&philo->table->mutex_dead);
@@ -91,9 +86,9 @@ void	*ft_routine(void *arg)
 			break ;
 		}
 		pthread_mutex_unlock(&philo->table->mutex_dead);
-		ft_take_forks(philo); //TO DO: decidir si la llamo desde aquí o desde comer
+		ft_take_forks(philo);
 		ft_eat(philo);
-		if (philo->table->dead) //si está muerto, me salgo
+		if (philo->table->dead)
 			break ;
 		ft_sleep(philo);
 		if (philo->table->dead)
@@ -101,5 +96,5 @@ void	*ft_routine(void *arg)
 		printf("%ld %d is thinking\n",
 			ft_get_time() - philo->table->start_time, philo->id_philo);
 	}
-	return (NULL); //probar cuando pueda probar el programa
+	return (NULL);
 }
