@@ -6,7 +6,7 @@
 /*   By: bvarea-k <bvarea-k@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/25 15:53:12 by bvarea-k          #+#    #+#             */
-/*   Updated: 2025/10/27 17:04:39 by bvarea-k         ###   ########.fr       */
+/*   Updated: 2025/10/28 11:07:56 by bvarea-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,13 @@
 
 static int	ft_is_dead(t_philo *philo)
 {
-	int dead;
+	int	dead;
 
 	pthread_mutex_lock(&philo->table->mutex_dead);
 	dead = philo->table->dead;
 	pthread_mutex_unlock(&philo->table->mutex_dead);
 	return (dead);
 }
-
 
 void	ft_take_forks(t_philo *philo)
 {
@@ -53,7 +52,7 @@ void	ft_take_forks(t_philo *philo)
 		if (ft_is_dead(philo))
 		{
 			pthread_mutex_unlock(&philo->table->forks[philo->id_philo
-			% philo->table->n_philos]);
+				% philo->table->n_philos]);
 			return ;
 		}
 		pthread_mutex_lock(&philo->table->forks[philo->id_philo - 1]);
@@ -61,8 +60,6 @@ void	ft_take_forks(t_philo *philo)
 			ft_get_time() - philo->table->start_time, philo->id_philo);
 	}
 }
-
-
 
 static void	ft_release_forks(t_philo *philo)
 {

@@ -6,7 +6,7 @@
 /*   By: bvarea-k <bvarea-k@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 16:32:00 by bvarea-k          #+#    #+#             */
-/*   Updated: 2025/10/27 17:05:00 by bvarea-k         ###   ########.fr       */
+/*   Updated: 2025/10/28 12:23:41 by bvarea-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ static int	ft_check_dead(t_table *table)
 			pthread_mutex_unlock(&table->philos[i].mutex_eat);
 			pthread_mutex_lock(&table->mutex_dead);
 			table->dead = 1;
+			//pthread_mutex_unlock(&table->mutex_dead);
 			printf("%ld %d died\n", current_time - table->start_time,
 				table->philos[i].id_philo);
 			pthread_mutex_unlock(&table->mutex_dead);
@@ -61,7 +62,7 @@ void	*ft_monitor(void *arg)
 			break ;
 		}
 		pthread_mutex_unlock(&table->mutex_dead);
-		usleep(100);
+		usleep(50);
 	}
 	return (NULL);
 }
@@ -103,8 +104,6 @@ static void	ft_my_loop(t_philo *philo)
 			ft_get_time() - philo->table->start_time, philo->id_philo);
 	}
 }
-
-
 
 void	*ft_routine(void *arg)
 {

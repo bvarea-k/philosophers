@@ -6,7 +6,7 @@
 /*   By: bvarea-k <bvarea-k@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/22 10:40:23 by bvarea-k          #+#    #+#             */
-/*   Updated: 2025/10/28 10:56:43 by bvarea-k         ###   ########.fr       */
+/*   Updated: 2025/10/28 12:29:44 by bvarea-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int	ft_init_table(int ac, char **av, t_table *table)
 	table->time_to_die = ft_atol(av[2]);
 	table->time_to_eat = ft_atol(av[3]);
 	table->time_to_sleep = ft_atol(av[4]);
+	table->must_eat = -1;
 	if (ac == 6)
 		table->must_eat = ft_atol(av[5]);
 	table->dead = 0;
@@ -81,11 +82,30 @@ int	ft_init_mutex(t_table *table)
 			return (0);
 		i++;
 	}
-	i = 0;
 	if (pthread_mutex_init(&table->mutex_dead, NULL))
 		return (0);
 	return (1);
 }
+
+/*int	ft_init_mutex(t_table *table)
+{
+	int	i;
+
+	i = 0;
+	while (i < table->n_philos)
+	{
+		pthread_mutex_init(&table->forks[i], NULL);
+		pthread_mutex_init(&table->philos[i].mutex_eat, NULL);
+		i++;
+	}
+	pthread_mutex_init(&table->mutex_dead, NULL)
+	if (mutex_dead)
+	{
+		
+		return (0);
+	}
+	return (1);
+}*/
 
 void	ft_create_thread(t_table *table)
 {
