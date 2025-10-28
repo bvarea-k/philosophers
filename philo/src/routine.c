@@ -6,7 +6,7 @@
 /*   By: bvarea-k <bvarea-k@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 16:32:00 by bvarea-k          #+#    #+#             */
-/*   Updated: 2025/10/28 16:23:30 by bvarea-k         ###   ########.fr       */
+/*   Updated: 2025/10/28 16:54:32 by bvarea-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,8 @@ void	*ft_routine(void *arg)
 	t_philo	*philo;
 
 	philo = (t_philo *)arg;
+	if (philo->id_philo % 2 == 0)
+		usleep(2000); //retraso 2 milisegundo los pares
 	philo->last_meal = ft_get_time();
 	if (philo->table->n_philos == 1)
 	{
