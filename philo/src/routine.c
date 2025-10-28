@@ -27,9 +27,9 @@ static int	ft_check_dead(t_table *table)
 			pthread_mutex_unlock(&table->philos[i].mutex_eat);
 			pthread_mutex_lock(&table->mutex_dead);
 			table->dead = 1;
-			pthread_mutex_unlock(&table->mutex_dead);
 			printf("%ld %d died\n", current_time - table->start_time,
 				table->philos[i].id_philo);
+			pthread_mutex_unlock(&table->mutex_dead);
 			return (1);
 		}
 		pthread_mutex_unlock(&table->philos[i].mutex_eat);

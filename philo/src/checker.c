@@ -6,7 +6,7 @@
 /*   By: bvarea-k <bvarea-k@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/22 11:19:15 by bvarea-k          #+#    #+#             */
-/*   Updated: 2025/10/27 09:45:36 by bvarea-k         ###   ########.fr       */
+/*   Updated: 2025/10/28 11:02:43 by bvarea-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,11 @@ int	ft_checker(char **av)
 	int	i;
 
 	i = 1;
+	if (atol(av[1]) > 200)
+	{
+		ft_print_error(ERROR_PHILO_NUMBER);
+		return (0);
+	}
 	while (av[i])
 	{
 		if (!ft_isdigit(av[i]))
