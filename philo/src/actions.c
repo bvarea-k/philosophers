@@ -6,7 +6,7 @@
 /*   By: bvarea-k <bvarea-k@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/25 15:53:12 by bvarea-k          #+#    #+#             */
-/*   Updated: 2025/10/29 16:04:55 by bvarea-k         ###   ########.fr       */
+/*   Updated: 2025/10/29 16:08:13 by bvarea-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	ft_take_forks(t_philo *philo)
 {
 	if (philo->id_philo % 2 != 0)
 	{
-		////if (ft_is_dead(philo))
+		if (ft_is_dead(philo))
 			return ;
 		pthread_mutex_lock(&philo->table->forks[philo->id_philo - 1]);
 		if (ft_is_dead(philo))

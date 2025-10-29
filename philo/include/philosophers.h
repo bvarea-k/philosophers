@@ -6,7 +6,7 @@
 /*   By: bvarea-k <bvarea-k@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 10:29:01 by bvarea-k          #+#    #+#             */
-/*   Updated: 2025/10/29 10:06:17 by bvarea-k         ###   ########.fr       */
+/*   Updated: 2025/10/29 16:07:33 by bvarea-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,6 @@ void	ft_eat(t_philo *philo);
 void	ft_sleep(t_philo *philo);
 int		ft_all_ate(t_table *table);
 void	print_wrapper(t_table *table, int philo_id, const char *msg);
+void	ft_usleep(long time_ms);
 
 #endif
