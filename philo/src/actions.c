@@ -6,7 +6,7 @@
 /*   By: bvarea-k <bvarea-k@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/25 15:53:12 by bvarea-k          #+#    #+#             */
-/*   Updated: 2025/10/29 11:09:11 by bvarea-k         ###   ########.fr       */
+/*   Updated: 2025/10/29 11:56:44 by bvarea-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	ft_take_forks(t_philo *philo)
 {
 	if (philo->id_philo % 2 != 0)
 	{
-		if (ft_is_dead(philo))
+		////if (ft_is_dead(philo))
 			return ;
 		pthread_mutex_lock(&philo->table->forks[philo->id_philo - 1]);
 		if (ft_is_dead(philo))
@@ -34,7 +34,7 @@ void	ft_take_forks(t_philo *philo)
 			pthread_mutex_unlock(&philo->table->forks[philo->id_philo - 1]);
 			return ;
 		}
-		print_wrapper(philo->table, philo->id_philo, "has taken a fork");
+		print_wrapper(philo->table, philo->id_philo, "has taken l fork");
 		pthread_mutex_lock(&philo->table->forks[philo->id_philo
 			% philo->table->n_philos]);
 		if (ft_is_dead(philo))
@@ -44,7 +44,7 @@ void	ft_take_forks(t_philo *philo)
 				% philo->table->n_philos]);
 			return ;
 		}
-		print_wrapper(philo->table, philo->id_philo, "has taken a fork");
+		print_wrapper(philo->table, philo->id_philo, "has taken r fork");
 	}
 	else
 	{
@@ -58,7 +58,7 @@ void	ft_take_forks(t_philo *philo)
 				% philo->table->n_philos]);
 			return ;
 		}
-		print_wrapper(philo->table, philo->id_philo, "has taken a fork");
+		print_wrapper(philo->table, philo->id_philo, "has taken r fork");
 		pthread_mutex_lock(&philo->table->forks[philo->id_philo - 1]);
 		if (ft_is_dead(philo))
 		{
@@ -67,7 +67,7 @@ void	ft_take_forks(t_philo *philo)
 				% philo->table->n_philos]);
 			return ;
 		}
-		print_wrapper(philo->table, philo->id_philo, "has taken a fork");
+		print_wrapper(philo->table, philo->id_philo, "has taken l fork");
 	}
 }
 
@@ -91,7 +91,7 @@ static void	ft_release_forks(t_philo *philo)
 void	ft_eat(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->mutex_eat);
-	if (ft_is_dead(philo)) //ya hago el lock en is_dead
+	if (ft_is_dead(philo))
 	{
 		ft_release_forks(philo);
 		return ;
