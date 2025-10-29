@@ -6,7 +6,7 @@
 /*   By: bvarea-k <bvarea-k@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/25 15:53:12 by bvarea-k          #+#    #+#             */
-/*   Updated: 2025/10/29 11:56:44 by bvarea-k         ###   ########.fr       */
+/*   Updated: 2025/10/29 16:04:55 by bvarea-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void	ft_eat(t_philo *philo)
 	philo->last_meal = ft_get_time();
 	philo->meals_eaten++;
 	pthread_mutex_unlock(&philo->mutex_eat);
-	usleep(philo->table->time_to_eat * 1000);
+	ft_usleep(philo->table->time_to_eat);
 	ft_release_forks(philo);
 }
 
@@ -114,7 +114,7 @@ void	ft_sleep(t_philo *philo)
 	}
 	pthread_mutex_unlock(&philo->table->mutex_dead);
 	print_wrapper(philo->table, philo->id_philo, "is sleeping");
-	usleep(philo->table->time_to_sleep * 1000);
+	ft_usleep(philo->table->time_to_sleep);
 	pthread_mutex_lock(&philo->table->mutex_dead);
 	if (philo->table->dead)
 	{
