@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bvarea-k <bvarea-k@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/24 16:32:00 by bvarea-k          #+#    #+#             */
-/*   Updated: 2025/10/28 16:54:32 by bvarea-k         ###   ########.fr       */
+/*   Created: 2025/10/29 09:01:47 by bvarea-k          #+#    #+#             */
+/*   Updated: 2025/10/29 10:40:34 by bvarea-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,7 @@ static int	ft_check_dead(t_table *table)
 			pthread_mutex_unlock(&table->philos[i].mutex_eat);
 			pthread_mutex_lock(&table->mutex_dead);
 			table->dead = 1;
-			printf("%ld %d died\n", current_time - table->start_time,
-				table->philos[i].id_philo);
+			print_wrapper(table, table->philos[i].id_philo, "died");
 			pthread_mutex_unlock(&table->mutex_dead);
 			return (1);
 		}
@@ -99,8 +98,7 @@ static void	ft_my_loop(t_philo *philo)
 		ft_sleep(philo);
 		if (philo->table->dead)
 			break ;
-		printf("%ld %d is thinking\n",
-			ft_get_time() - philo->table->start_time, philo->id_philo);
+		print_wrapper(philo->table, philo->id_philo, "is thinking");
 	}
 }
 
@@ -110,7 +108,7 @@ void	*ft_routine(void *arg)
 
 	philo = (t_philo *)arg;
 	if (philo->id_philo % 2 == 0)
-		usleep(2000); //retraso 2 milisegundo los pares
+		usleep(1000);
 	philo->last_meal = ft_get_time();
 	if (philo->table->n_philos == 1)
 	{

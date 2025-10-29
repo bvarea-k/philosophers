@@ -1,32 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bvarea-k <bvarea-k@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/27 16:00:18 by bvarea-k          #+#    #+#             */
-/*   Updated: 2025/10/29 10:48:12 by bvarea-k         ###   ########.fr       */
+/*   Created: 2025/10/29 09:36:45 by bvarea-k          #+#    #+#             */
+/*   Updated: 2025/10/29 10:02:31 by bvarea-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int	ft_all_ate(t_table *table)
+void	print_wrapper(t_table *table, int philo_id, const char *msg)
 {
-	int	i;
+	long	timestamp;
 
-	i = 0;
-	while (i < table->n_philos)
-	{
-		pthread_mutex_lock(&table->philos[i].mutex_eat);
-		if (table->philos[i].meals_eaten < table->must_eat)
-		{
-			pthread_mutex_unlock(&table->philos[i].mutex_eat);
-			return (0);
-		}
-		pthread_mutex_unlock(&table->philos[i].mutex_eat);
-		i++;
-	}
-	return (1);
+	timestamp = ft_get_time() - table->start_time;
+	pthread_mutex_lock(&table->mutex_print);
+	printf("%ld %d %s\n", timestamp, philo_id, msg);
+	pthread_mutex_unlock(&table->mutex_print);
 }

@@ -6,7 +6,7 @@
 /*   By: bvarea-k <bvarea-k@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 10:29:01 by bvarea-k          #+#    #+#             */
-/*   Updated: 2025/10/27 17:03:50 by bvarea-k         ###   ########.fr       */
+/*   Updated: 2025/10/29 10:06:17 by bvarea-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct s_table
 	long			start_time;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	mutex_dead;
+	pthread_mutex_t	mutex_print;
 	t_philo			*philos;
 }	t_table;
 
@@ -66,5 +67,6 @@ void	ft_take_forks(t_philo *philo);
 void	ft_eat(t_philo *philo);
 void	ft_sleep(t_philo *philo);
 int		ft_all_ate(t_table *table);
+void	print_wrapper(t_table *table, int philo_id, const char *msg);
 
 #endif
