@@ -6,13 +6,13 @@
 /*   By: bvarea-k <bvarea-k@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/25 15:53:12 by bvarea-k          #+#    #+#             */
-/*   Updated: 2025/10/30 10:56:32 by bvarea-k         ###   ########.fr       */
+/*   Updated: 2025/10/30 17:24:07 by bvarea-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-/*static int	ft_is_dead(t_philo *philo)
+static int	ft_is_dead(t_philo *philo)
 {
 	int	dead;
 
@@ -20,9 +20,9 @@
 	dead = philo->table->dead;
 	pthread_mutex_unlock(&philo->table->mutex_dead);
 	return (dead);
-}*/
+}
 
-/*void	ft_take_forks(t_philo *philo)
+void	ft_take_forks(t_philo *philo)
 {
 	if (philo->id_philo % 2 != 0)
 	{
@@ -69,21 +69,7 @@
 		}
 		print_wrapper(philo->table, philo->id_philo, "has taken l fork");
 	}
-}*/
-void	ft_take_forks(t_philo *philo)
-{
-	int	left = philo->id_philo - 1;
-	int	right = philo->id_philo % philo->table->n_philos;
-
-	if (philo->id_philo % 2 == 0)
-		usleep(100); // pequeña desincronización
-
-	pthread_mutex_lock(&philo->table->forks[left]);
-	print_wrapper(philo->table, philo->id_philo, "has taken left fork");
-	pthread_mutex_lock(&philo->table->forks[right]);
-	print_wrapper(philo->table, philo->id_philo, "has taken right fork");
 }
-
 
 static void	ft_release_forks(t_philo *philo)
 {
@@ -102,7 +88,7 @@ static void	ft_release_forks(t_philo *philo)
 	}
 }
 
-/*void	ft_eat(t_philo *philo)
+void	ft_eat(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->mutex_eat);
 	if (ft_is_dead(philo))
@@ -116,21 +102,7 @@ static void	ft_release_forks(t_philo *philo)
 	pthread_mutex_unlock(&philo->mutex_eat);
 	ft_usleep(philo->table->time_to_eat);
 	ft_release_forks(philo);
-}*/
-
-void	ft_eat(t_philo *philo)
-{
-	pthread_mutex_lock(&philo->mutex_eat);
-	philo->last_meal = ft_get_time();
-	philo->meals_eaten++;
-	pthread_mutex_unlock(&philo->mutex_eat);
-
-	print_wrapper(philo->table, philo->id_philo, "is eating");
-	ft_usleep(philo->table->time_to_eat);
-	ft_release_forks(philo);
 }
-
-
 
 void	ft_sleep(t_philo *philo)
 {

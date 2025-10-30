@@ -6,7 +6,7 @@
 /*   By: bvarea-k <bvarea-k@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 09:01:47 by bvarea-k          #+#    #+#             */
-/*   Updated: 2025/10/29 10:40:34 by bvarea-k         ###   ########.fr       */
+/*   Updated: 2025/10/30 17:37:05 by bvarea-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static void	ft_one_philo(t_philo *philo)
 	{
 		printf("%ld %d has taken the left fork\n",
 			ft_get_time() - philo->table->start_time, philo->id_philo);
-		usleep(philo->table->time_to_die);
+		ft_usleep(philo->table->time_to_die);
 		printf("%ld %d died\n",
 			ft_get_time() - philo->table->start_time, philo->id_philo);
 		pthread_mutex_lock(&philo->table->mutex_dead);
