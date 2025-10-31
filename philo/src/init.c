@@ -6,37 +6,15 @@
 /*   By: bvarea-k <bvarea-k@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/22 10:40:23 by bvarea-k          #+#    #+#             */
-/*   Updated: 2025/10/29 16:04:09 by bvarea-k         ###   ########.fr       */
+/*   Updated: 2025/10/31 16:42:47 by bvarea-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-long	ft_get_time(void)
-{
-	struct timeval	time;
-
-	gettimeofday(&time, NULL);
-	return (time.tv_sec * 1000 + time.tv_usec / 1000);
-}
-
-void	ft_usleep(long time_ms)
-{
-	long	start;
-
-	start = ft_get_time();
-	while ((ft_get_time() - start) < time_ms)
-		usleep(50);
-}
-
 int	ft_init_table(int ac, char **av, t_table *table)
 {
 	table->n_philos = ft_atol(av[1]);
-	if (table->n_philos < 1)
-	{
-		ft_print_error(ERROR_PHILO_NUMBER);
-		return (0);
-	}
 	table->time_to_die = ft_atol(av[2]);
 	table->time_to_eat = ft_atol(av[3]);
 	table->time_to_sleep = ft_atol(av[4]);

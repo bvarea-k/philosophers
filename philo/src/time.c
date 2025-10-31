@@ -1,32 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   time.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bvarea-k <bvarea-k@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/27 16:00:18 by bvarea-k          #+#    #+#             */
-/*   Updated: 2025/10/29 10:48:12 by bvarea-k         ###   ########.fr       */
+/*   Created: 2025/10/31 16:41:56 by bvarea-k          #+#    #+#             */
+/*   Updated: 2025/10/31 16:42:54 by bvarea-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int	ft_all_ate(t_table *table)
+long	ft_get_time(void)
 {
-	int	i;
+	struct timeval	time;
 
-	i = 0;
-	while (i < table->n_philos)
-	{
-		pthread_mutex_lock(&table->philos[i].mutex_eat);
-		if (table->philos[i].meals_eaten < table->must_eat)
-		{
-			pthread_mutex_unlock(&table->philos[i].mutex_eat);
-			return (0);
-		}
-		pthread_mutex_unlock(&table->philos[i].mutex_eat);
-		i++;
-	}
-	return (1);
+	gettimeofday(&time, NULL);
+	return (time.tv_sec * 1000 + time.tv_usec / 1000);
+}
+
+void	ft_usleep(long time_ms)
+{
+	long	start;
+
+	start = ft_get_time();
+	while ((ft_get_time() - start) < time_ms)
+		usleep(50);
 }
