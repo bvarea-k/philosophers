@@ -6,7 +6,7 @@
 /*   By: bvarea-k <bvarea-k@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 16:47:41 by bvarea-k          #+#    #+#             */
-/*   Updated: 2025/10/31 16:57:35 by bvarea-k         ###   ########.fr       */
+/*   Updated: 2025/11/01 13:28:52 by bvarea-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,21 +56,13 @@ static void	ft_one_philo(t_philo *philo)
 }
 static void	ft_my_loop(t_philo *philo)
 {
-	while (1)
+	while (!ft_is_dead(philo))
 	{
-		if (pthread_mutex_lock(&philo->table->mutex_dead))
-			break ;
-		if (philo->table->dead)
-		{
-			pthread_mutex_unlock(&philo->table->mutex_dead);
-			break ;
-		}
-		pthread_mutex_unlock(&philo->table->mutex_dead);
 		ft_eat(philo);
-		if (philo->table->dead)
+		if (ft_is_dead(philo))
 			break ;
 		ft_sleep(philo);
-		if (philo->table->dead)
+		if (ft_is_dead(philo))
 			break ;
 		print_wrapper(philo->table, philo->id_philo, "is thinking");
 	}

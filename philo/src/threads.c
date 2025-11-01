@@ -6,7 +6,7 @@
 /*   By: bvarea-k <bvarea-k@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 16:32:42 by bvarea-k          #+#    #+#             */
-/*   Updated: 2025/10/31 16:38:19 by bvarea-k         ###   ########.fr       */
+/*   Updated: 2025/11/01 13:17:47 by bvarea-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ static int	ft_create_monitor_thread(t_table *table, pthread_t *monitor)
 	}
 	return (1);
 }
+
 /*If the monitor creation fails, we destroy the philos*/
 void	ft_create_thread(t_table *table)
 {
