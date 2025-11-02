@@ -63,7 +63,7 @@ void	ft_free_table(t_table *table);
 void	ft_create_thread(t_table *table);
 void	*ft_routine(void *arg);
 void	*ft_monitor(void *arg);
-void	ft_take_forks(t_philo *philo);
+int	ft_take_forks(t_philo *philo);
 void	ft_eat(t_philo *philo);
 void	ft_sleep(t_philo *philo);
 int		ft_all_ate(t_table *table);
