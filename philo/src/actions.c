@@ -6,7 +6,7 @@
 /*   By: bvarea-k <bvarea-k@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 13:35:59 by bvarea-k          #+#    #+#             */
-/*   Updated: 2025/11/01 13:51:33 by bvarea-k         ###   ########.fr       */
+/*   Updated: 2025/11/02 15:55:49 by bvarea-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,10 +75,10 @@ void	ft_eat(t_philo *philo)
 	}
 	if (pthread_mutex_lock(&philo->mutex_eat))
 		return ;
-	print_wrapper(philo->table, philo->id_philo, "is eating");
 	philo->last_meal = ft_get_time();
 	philo->meals_eaten++;
 	pthread_mutex_unlock(&philo->mutex_eat);
+	print_wrapper(philo->table, philo->id_philo, "is eating");
 	ft_usleep(philo->table->time_to_eat);
 	ft_release_forks(philo);
 }

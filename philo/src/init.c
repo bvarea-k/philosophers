@@ -6,7 +6,7 @@
 /*   By: bvarea-k <bvarea-k@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/22 10:40:23 by bvarea-k          #+#    #+#             */
-/*   Updated: 2025/10/31 16:42:47 by bvarea-k         ###   ########.fr       */
+/*   Updated: 2025/11/02 13:46:01 by bvarea-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,26 +76,3 @@ int	ft_init_mutex(t_table *table)
 	return (1);
 }
 
-void	ft_create_thread(t_table *table)
-{
-	int			i;
-	pthread_t	monitor;
-
-	i = 0;
-	while (i < table->n_philos)
-	{
-		if (pthread_create(&table->philos[i].thread,
-				NULL, ft_routine, &table->philos[i]))
-			return (ft_print_error(ERROR_PHILO));
-		i++;
-	}
-	if (pthread_create(&monitor, NULL, ft_monitor, table))
-		return (ft_print_error(ERROR_MONITOR));
-	pthread_join(monitor, NULL);
-	i = 0;
-	while (i < table->n_philos)
-	{
-		pthread_join(table->philos[i].thread, NULL);
-		i++;
-	}
-}
