@@ -6,7 +6,7 @@
 /*   By: bvarea-k <bvarea-k@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 13:35:59 by bvarea-k          #+#    #+#             */
-/*   Updated: 2025/11/02 15:55:49 by bvarea-k         ###   ########.fr       */
+/*   Updated: 2025/11/03 10:27:04 by bvarea-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ int	ft_take_forks(t_philo *philo)
 		}
 		if (pthread_mutex_lock(&philo->table->forks[r_fork]))
 		{
-			/* failed to take right fork: release left and report failure */
 			pthread_mutex_unlock(&philo->table->forks[l_fork]);
 			return (0);
 		}
@@ -84,7 +83,6 @@ void	ft_eat(t_philo *philo)
 	}
 	if (pthread_mutex_lock(&philo->mutex_eat))
 	{
-		/* if locking per-philo mutex fails, release forks before leaving */
 		ft_release_forks(philo);
 		return ;
 	}

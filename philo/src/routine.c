@@ -6,7 +6,7 @@
 /*   By: bvarea-k <bvarea-k@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 16:47:41 by bvarea-k          #+#    #+#             */
-/*   Updated: 2025/11/02 16:37:14 by bvarea-k         ###   ########.fr       */
+/*   Updated: 2025/11/03 10:11:15 by bvarea-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,14 +78,13 @@ static void	ft_one_philo(t_philo *philo)
 	printf("%ld %d has taken a fork\n",
 			ft_get_time() - philo->table->start_time, philo->id_philo);
 	ft_usleep(philo->table->time_to_die);
-	
 	pthread_mutex_lock(&philo->table->mutex_dead);
 	if (!philo->table->dead)
 	{
 		philo->table->dead = 1;
 		printf("%ld %d died\n",
 			ft_get_time() - philo->table->start_time, philo->id_philo);
-	}		
+	}
 	pthread_mutex_unlock(&philo->table->mutex_dead);
 	pthread_mutex_unlock(&philo->table->mutex_print);
 }
