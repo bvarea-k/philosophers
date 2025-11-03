@@ -6,7 +6,7 @@
 /*   By: bvarea-k <bvarea-k@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 16:47:41 by bvarea-k          #+#    #+#             */
-/*   Updated: 2025/11/03 11:10:16 by bvarea-k         ###   ########.fr       */
+/*   Updated: 2025/11/03 11:18:04 by bvarea-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,8 +110,6 @@ void	*ft_routine(void *arg)
 	t_philo	*philo;
 
 	philo = (t_philo *)arg;
-	if (philo->id_philo % 2 == 0)
-		//ft_uslee tiempo de comer / 2; //si es par, siesta
 	pthread_mutex_lock(&philo->mutex_eat);
 	philo->last_meal = ft_get_time();
 	pthread_mutex_unlock(&philo->mutex_eat);
