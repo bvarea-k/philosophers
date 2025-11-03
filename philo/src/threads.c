@@ -6,7 +6,7 @@
 /*   By: bvarea-k <bvarea-k@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 16:32:42 by bvarea-k          #+#    #+#             */
-/*   Updated: 2025/11/03 10:34:02 by bvarea-k         ###   ########.fr       */
+/*   Updated: 2025/11/03 13:57:15 by bvarea-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ we remove them one by one */
 static int	ft_create_philo_threads(t_table *table)
 {
 	int	i;
-
+	
+	table->start_time = ft_get_time();
 	i = 0;
 	while (i < table->n_philos)
 	{
