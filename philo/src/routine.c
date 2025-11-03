@@ -6,7 +6,7 @@
 /*   By: bvarea-k <bvarea-k@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 16:47:41 by bvarea-k          #+#    #+#             */
-/*   Updated: 2025/11/03 10:11:15 by bvarea-k         ###   ########.fr       */
+/*   Updated: 2025/11/03 11:10:16 by bvarea-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ static void	ft_one_philo(t_philo *philo)
 	pthread_mutex_unlock(&philo->table->mutex_dead);
 	pthread_mutex_unlock(&philo->table->mutex_print);
 }
+
 static void	ft_my_loop(t_philo *philo)
 {
 	while (!ft_is_dead(philo))
@@ -99,6 +100,8 @@ static void	ft_my_loop(t_philo *philo)
 		if (ft_is_dead(philo))
 			break ;
 		print_wrapper(philo->table, philo->id_philo, "is thinking");
+		if (philo->id_philo % 2 != 0)
+			ft_usleep(1);
 	}
 }
 
@@ -108,7 +111,7 @@ void	*ft_routine(void *arg)
 
 	philo = (t_philo *)arg;
 	if (philo->id_philo % 2 == 0)
-		usleep(1000); //si es par, siesta
+		//ft_uslee tiempo de comer / 2; //si es par, siesta
 	pthread_mutex_lock(&philo->mutex_eat);
 	philo->last_meal = ft_get_time();
 	pthread_mutex_unlock(&philo->mutex_eat);
