@@ -6,7 +6,7 @@
 /*   By: bvarea-k <bvarea-k@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 13:35:59 by bvarea-k          #+#    #+#             */
-/*   Updated: 2025/11/03 10:27:04 by bvarea-k         ###   ########.fr       */
+/*   Updated: 2025/11/04 09:51:00 by bvarea-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,45 +20,9 @@ int	ft_take_forks(t_philo *philo)
 	l_fork = philo->id_philo - 1;
 	r_fork = (philo->id_philo) % philo->table->n_philos;
 	if (philo->id_philo % 2 != 0)
-	{
-		if (ft_is_dead(philo))
-			return (0);
-		if (pthread_mutex_lock(&philo->table->forks[l_fork]))
-			return (0);
-		print_wrapper(philo->table, philo->id_philo, "has taken l fork");
-		if (ft_is_dead(philo))
-		{
-			pthread_mutex_unlock(&philo->table->forks[l_fork]);
-			return (0);
-		}
-		if (pthread_mutex_lock(&philo->table->forks[r_fork]))
-		{
-			pthread_mutex_unlock(&philo->table->forks[l_fork]);
-			return (0);
-		}
-		print_wrapper(philo->table, philo->id_philo, "has taken r fork");
-	}
+		return (ft_take_odd_forks(philo, l_fork, r_fork));
 	else
-	{
-		if (ft_is_dead(philo))
-			return (0);
-		if (pthread_mutex_lock(&philo->table->forks[r_fork]))
-			return (0);
-		print_wrapper(philo->table, philo->id_philo, "has taken r fork");
-
-		if (ft_is_dead(philo))
-		{
-			pthread_mutex_unlock(&philo->table->forks[r_fork]);
-			return (0);
-		}
-		if (pthread_mutex_lock(&philo->table->forks[l_fork]))
-		{
-			pthread_mutex_unlock(&philo->table->forks[r_fork]);
-			return (0);
-		}
-		print_wrapper(philo->table, philo->id_philo, "has taken l fork");
-	}
-	return (1);
+		return (ft_take_even_forks(philo, l_fork, r_fork));
 }
 
 static void	ft_release_forks(t_philo *philo)
@@ -108,7 +72,7 @@ void	ft_sleep(t_philo *philo)
 			pthread_mutex_unlock(&philo->table->mutex_dead);
 			return ;
 		}
-		pthread_mutex_unlock(&philo->table->mutex_dead);	
+		pthread_mutex_unlock(&philo->table->mutex_dead);
 		usleep(100);
 	}
 }

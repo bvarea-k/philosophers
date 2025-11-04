@@ -6,7 +6,7 @@
 /*   By: bvarea-k <bvarea-k@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 16:32:42 by bvarea-k          #+#    #+#             */
-/*   Updated: 2025/11/03 13:57:15 by bvarea-k         ###   ########.fr       */
+/*   Updated: 2025/11/04 09:57:39 by bvarea-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ we remove them one by one */
 static int	ft_create_philo_threads(t_table *table)
 {
 	int	i;
-	
+
 	table->start_time = ft_get_time();
 	i = 0;
 	while (i < table->n_philos)
@@ -77,6 +77,3 @@ void	ft_create_thread(t_table *table)
 		i++;
 	}
 }
-/*Crear hilos de filos, si falla, retorno,
-creo el monitor y, si falla, uno los de los filos.
-Espero que termine el monitor y luego a los filos.*/

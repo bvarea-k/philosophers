@@ -6,43 +6,37 @@
 /*   By: bvarea-k <bvarea-k@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 16:47:41 by bvarea-k          #+#    #+#             */
-/*   Updated: 2025/11/03 13:59:42 by bvarea-k         ###   ########.fr       */
+/*   Updated: 2025/11/04 10:13:56 by bvarea-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-static int  ft_check_dead(t_table *table)
+static int	ft_check_dead(t_table *table)
 {
-    int     i;
-    long    current_time;
+	int		i;
+	long	current_time;
 
-    i = 0;
-    while (i < table->n_philos)
-    {
-        pthread_mutex_lock(&table->philos[i].mutex_eat);
-        current_time = ft_get_time();
-        if (current_time - table->philos[i].last_meal >= table->time_to_die)
-        {
-            pthread_mutex_unlock(&table->philos[i].mutex_eat);
+	i = 0;
+	while (i < table->n_philos)
+	{
+		pthread_mutex_lock(&table->philos[i].mutex_eat);
+		current_time = ft_get_time();
+		if (current_time - table->philos[i].last_meal >= table->time_to_die)
+		{
+			pthread_mutex_unlock(&table->philos[i].mutex_eat);
 			pthread_mutex_lock(&table->mutex_print);
-            pthread_mutex_lock(&table->mutex_dead);
-            if (!table->dead)
-            {
-                table->dead = 1;
-                
-                printf("%ld %d died\n",
-                    ft_get_time() - table->start_time, table->philos[i].id_philo);
-                
-            }
-            pthread_mutex_unlock(&table->mutex_dead);
+			pthread_mutex_lock(&table->mutex_dead);
+			if (!table->dead)
+				ft_announce_death(table, i);
+			pthread_mutex_unlock(&table->mutex_dead);
 			pthread_mutex_unlock(&table->mutex_print);
-            return (1);
-        }
-        pthread_mutex_unlock(&table->philos[i].mutex_eat);
-        i++;
-    }
-    return (0);
+			return (1);
+		}
+		pthread_mutex_unlock(&table->philos[i].mutex_eat);
+		i++;
+	}
+	return (0);
 }
 
 void	*ft_monitor(void *arg)
@@ -72,11 +66,12 @@ void	*ft_monitor(void *arg)
 	}
 	return (NULL);
 }
+
 static void	ft_one_philo(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->table->mutex_print);
 	printf("%ld %d has taken a fork\n",
-			ft_get_time() - philo->table->start_time, philo->id_philo);
+		ft_get_time() - philo->table->start_time, philo->id_philo);
 	ft_usleep(philo->table->time_to_die);
 	pthread_mutex_lock(&philo->table->mutex_dead);
 	if (!philo->table->dead)

@@ -6,7 +6,7 @@
 /*   By: bvarea-k <bvarea-k@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/22 10:40:23 by bvarea-k          #+#    #+#             */
-/*   Updated: 2025/11/03 13:57:06 by bvarea-k         ###   ########.fr       */
+/*   Updated: 2025/11/04 09:58:09 by bvarea-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,4 +75,3 @@ int	ft_init_mutex(t_table *table)
 		return (0);
 	return (1);
 }
-

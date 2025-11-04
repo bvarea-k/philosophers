@@ -6,7 +6,7 @@
 /*   By: bvarea-k <bvarea-k@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 09:36:45 by bvarea-k          #+#    #+#             */
-/*   Updated: 2025/11/01 13:33:15 by bvarea-k         ###   ########.fr       */
+/*   Updated: 2025/11/04 09:58:20 by bvarea-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,3 @@ void	print_wrapper(t_table *table, int philo_id, const char *msg)
 	printf("%ld %d %s\n", timestamp, philo_id, msg);
 	pthread_mutex_unlock(&table->mutex_print);
 }
-
-
-
-

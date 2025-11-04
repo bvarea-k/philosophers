@@ -6,7 +6,7 @@
 /*   By: bvarea-k <bvarea-k@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 10:29:01 by bvarea-k          #+#    #+#             */
-/*   Updated: 2025/11/02 13:39:20 by bvarea-k         ###   ########.fr       */
+/*   Updated: 2025/11/04 10:09:47 by bvarea-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,12 +63,15 @@ void	ft_free_table(t_table *table);
 void	ft_create_thread(t_table *table);
 void	*ft_routine(void *arg);
 void	*ft_monitor(void *arg);
-int	ft_take_forks(t_philo *philo);
+int		ft_take_forks(t_philo *philo);
 void	ft_eat(t_philo *philo);
 void	ft_sleep(t_philo *philo);
 int		ft_all_ate(t_table *table);
 void	print_wrapper(t_table *table, int philo_id, const char *msg);
 void	ft_usleep(long time_ms);
 int		ft_is_dead(t_philo *philo);
+int		ft_take_even_forks(t_philo *philo, int l_fork, int r_fork);
+int		ft_take_odd_forks(t_philo *philo, int l_fork, int r_fork);
+void	ft_announce_death(t_table *table, int i);
 
 #endif

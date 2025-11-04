@@ -6,7 +6,7 @@
 /*   By: bvarea-k <bvarea-k@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/22 14:04:05 by bvarea-k          #+#    #+#             */
-/*   Updated: 2025/10/31 16:25:55 by bvarea-k         ###   ########.fr       */
+/*   Updated: 2025/11/04 09:57:58 by bvarea-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,3 @@ void	ft_free_table(t_table *table)
 		free(table->philos);
 	}
 }
-	
