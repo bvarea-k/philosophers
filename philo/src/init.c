@@ -6,7 +6,7 @@
 /*   By: bvarea-k <bvarea-k@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/22 10:40:23 by bvarea-k          #+#    #+#             */
-/*   Updated: 2025/11/04 09:58:09 by bvarea-k         ###   ########.fr       */
+/*   Updated: 2025/11/04 11:37:56 by bvarea-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	ft_init_table(int ac, char **av, t_table *table)
 	if (ac == 6)
 		table->must_eat = ft_atol(av[5]);
 	table->dead = 0;
-	table->start_time = 0;
+	table->start_time = ft_get_time();
 	table->forks = malloc(table->n_philos * sizeof(pthread_mutex_t));
 	if (!table->forks)
 		return (0);
