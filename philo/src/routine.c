@@ -6,7 +6,7 @@
 /*   By: bvarea-k <bvarea-k@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 16:47:41 by bvarea-k          #+#    #+#             */
-/*   Updated: 2025/11/04 10:13:56 by bvarea-k         ###   ########.fr       */
+/*   Updated: 2025/11/04 11:18:39 by bvarea-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ void	*ft_routine(void *arg)
 	t_philo	*philo;
 
 	philo = (t_philo *)arg;
+	philo->table->start_time = ft_get_time();
 	pthread_mutex_lock(&philo->mutex_eat);
 	philo->last_meal = philo->table->start_time;
 	pthread_mutex_unlock(&philo->mutex_eat);

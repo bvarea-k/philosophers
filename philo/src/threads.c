@@ -6,7 +6,7 @@
 /*   By: bvarea-k <bvarea-k@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 16:32:42 by bvarea-k          #+#    #+#             */
-/*   Updated: 2025/11/04 09:57:39 by bvarea-k         ###   ########.fr       */
+/*   Updated: 2025/11/04 10:52:46 by bvarea-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ static int	ft_create_philo_threads(t_table *table)
 {
 	int	i;
 
-	table->start_time = ft_get_time();
 	i = 0;
 	while (i < table->n_philos)
 	{
